@@ -1,0 +1,20 @@
+Trafo 		https://www.reichelt.de/printtrafo-16-va-6-v-2666-ma-rm-30-mm-ei-54-18-8-106-p27373.html
+HP-Connector 	https://de.aliexpress.com/item/10-teile-los-7-62mm-KF7-62-2-p-3-p-4-p-MG-762-2/32924525467.html
+fuse 		https://de.aliexpress.com/item/10-ST-CKE-BLX-A-5-20-MM-SCHWARZ-GLAS-SICHERUNGSHALTER-5-20-versicherungsrohr-buchse-sicherungshalter/32853061637.html
+encoder		https://de.aliexpress.com/item/5-st-cke-Halb-Plum-achse-drehgeber-griff-l-nge-15mm-20mm-code-schalter-EC11-digitale/32846718746.html
+i2c_oled	https://de.aliexpress.com/item/Neue-original-4pin-0-96-Wei-Blau-Gelb-blau-0-96-zoll-OLED-128X64-OLED-Display/32835854912.html
+7805		https://de.aliexpress.com/item/10-teile-los-L7805CV-L7805-7805-LM7805-KA7805-Spannung-Regler-5-v-ZU-220-Auf-Lager/32892570189.html
+esp8266		https://de.aliexpress.com/item/ESP8266-serial-WIFI-model-ESP-12-ESP-12E-ESP12E-Authenticity-Guaranteed-ESP12/32714108970.html
+nrf24		https://de.aliexpress.com/item/1pcs-Wireless-Transceiver-For-Arduino-NRF24L01-2-4GHz-Antenna-Module-For-Microcontroll-DropShipping/32599246022.html
+MCP2515		https://de.aliexpress.com/item/5-teile-lose-MCP2515-I-SO-MCP2515-SOP-18-100-Neue-original-IC-Auf-Lager/32905963301.html
+TJA1050		https://de.aliexpress.com/item/10PCS-TJA1050T-SOP8-TJA1050-A1050-SOP-SMD-new-and-original-free-shipping/32477532406.html
+R 1k 0805	-
+100nF 0805	-
+8pF 0805	-
+LED 1208	-
+16Mhz Quarz	-
+atmega8		-
+stiftleiste	-
+diode		-
+47uFCap		-
+Can-Connector	-

@@ -1,0 +1,5 @@
+(sym_lib_table
+  (lib (name ESP8266)(type Legacy)(uri ${KIPRJMOD}/kicad-ESP8266/ESP8266.lib)(options "")(descr ""))
+  (lib (name MCP2515)(type Legacy)(uri ${KIPRJMOD}/MCP2515.lib)(options "")(descr ""))
+  (lib (name rotary_encoder_switch)(type Legacy)(uri ${KIPRJMOD}/rotary_encoder_switch.lib)(options "")(descr ""))
+)
