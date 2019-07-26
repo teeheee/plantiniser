@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP FINDER-40.11
+D PCB SPDT relay, 10A
+K Single Pole Relay SPDT Finder
+F https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+$ENDCMP
+#
+$CMP FINDER-40.11-2016
+D PCB SPDT relay, 16A
+K Single Pole Relay SPDT Finder
+F https://www.finder-relais.net/de/finder-relais-serie-40.pdf
+$ENDCMP
+#
+#End Doc Library

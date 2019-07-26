@@ -1,0 +1,6 @@
+(fp_lib_table
+  (lib (name mardah_power_supply)(type KiCad)(uri ${KIPRJMOD}/footprints/mardah_power_supply.pretty)(options "")(descr ""))
+  (lib (name mysensors_radios)(type KiCad)(uri ${KIPRJMOD}/footprints/mysensors_radios.pretty)(options "")(descr ""))
+  (lib (name i2c_oled)(type KiCad)(uri ${KIPRJMOD}/footprints/i2c_oled.pretty)(options "")(descr ""))
+  (lib (name terminal_block)(type KiCad)(uri ${KIPRJMOD}/footprints/terminal_block.pretty)(options "")(descr ""))
+)

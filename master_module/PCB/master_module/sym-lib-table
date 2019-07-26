@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name mysensors_radios)(type Legacy)(uri ${KIPRJMOD}/symbols/mysensors_radios.lib)(options "")(descr ""))
+  (lib (name mardah_power_supply)(type Legacy)(uri ${KIPRJMOD}/symbols/mardah_power_supply.lib)(options "")(descr ""))
+  (lib (name relay)(type Legacy)(uri /home/alexander/workspace/plantiniser/master_module/PCB/master_module/symbols/relay.lib)(options "")(descr ""))
+  (lib (name master_module-rescue)(type Legacy)(uri ${KIPRJMOD}/master_module-rescue.lib)(options "")(descr ""))
+)
