@@ -14,7 +14,7 @@ ConfigBaseItem::ConfigBaseItem(int a_datasize, const char* a_description)
     eeprom_get(&checksum, 1, address_counter);
     address_counter += 1;
     data_pointer = (uint8_t*)malloc(data_size);
-    //EEPROM.get(data_pointer, data_size);
+    eeprom_get(data_pointer, 1, address_counter);
     uint8_t real_checksum = calc_checksum(data_pointer, data_size);
     if(real_checksum != checksum)
     {
