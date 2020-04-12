@@ -18,33 +18,32 @@ void callback(char* topic, byte* payload, unsigned int length)
     //TODO
 }
 
-void hal_mqtt_impl::init(const char* ssid,const char* password,const char* server)
+void hal_mqtt_impl::init(std::string ssid, std::string pass, std::string server)
 {
     delay(10);
     topic_index = 0;
-    WiFi.begin(ssid, password);
+    WiFi.begin(ssid.c_str(), pass.c_str());
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
-        PRINT_WRAPPER(".");
     }
     randomSeed(micros());
     IPAddress ip = WiFi.localIP();
-    client.setServer(server, 1883);
+    client.setServer(server.c_str(), 1883);
     client.setCallback(callback);
 }
 
-void hal_mqtt_impl::pub(char* topic, uint8_t* payload, unsigned int length)
+void hal_mqtt_impl::pub(std::string topic, std::string payload)
 {
-    client.publish(topic, (const char*)payload);
+    client.publish(topic.c_str(), payload.c_str());
 }
 
-void hal_mqtt_impl::sub(char* topic, mqtt_sub_callback_t callback)
+void hal_mqtt_impl::sub(std::string topic, mqtt_sub_callback_t callback)
 {
     if(topic_index < MAX_TOPICS)
     {
-        client.subscribe(topic);
+        client.subscribe(topic.c_str());
         callback_list[topic_index] = callback;
-        topiclist[topic_index++] = topic;
+        topiclist[topic_index++] = (char*)topic.c_str();
     }
     else
     {

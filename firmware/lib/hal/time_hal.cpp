@@ -32,9 +32,10 @@ int hal_time_impl::get_day()
     return timeClient.getDay();
 }
 
-String hal_time_impl::get_formated()
+std::string hal_time_impl::get_formated()
 {
-    return timeClient.getFormattedTime();
+    String formatted = timeClient.getFormattedTime();
+    return std::string(formatted.c_str());
 }
 
 #endif

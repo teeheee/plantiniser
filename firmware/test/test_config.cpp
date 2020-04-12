@@ -52,7 +52,7 @@ TEST(StringItem, Initilaization_Fail)
   eeprom.clear();
 
   eeprom.init(); 
-  StringItem wlan_ssid = StringItem(&eeprom, 0, 10, "WLAN SSID");
+  StringItem wlan_ssid = StringItem(&eeprom, 0, 20, "WLAN SSID");
   
   EXPECT_EQ(wlan_ssid.is_data_valid(), false);
 }
@@ -65,7 +65,7 @@ TEST(StringItem, Initilaization_Pass)
   memcpy(&eeprom.memory[1], teststring.data(), teststring.size());
 
   eeprom.init();
-  StringItem wlan_ssid = StringItem(&eeprom, 0, 4, "WLAN SSID");
+  StringItem wlan_ssid = StringItem(&eeprom, 0, 20, "WLAN SSID");
   
   EXPECT_EQ(wlan_ssid.is_data_valid(), true);
 }
@@ -76,10 +76,9 @@ TEST(StringItem, read_write)
   std::string passkey = std::string("1234");
 
   eeprom.init();
-  StringItem wlan_ssid = StringItem(&eeprom, 0, 5, "WLAN SSID");
+  StringItem wlan_ssid = StringItem(&eeprom, 0, 20, "WLAN SSID");
   wlan_ssid.write_data(passkey);
   std::string text = wlan_ssid.read_data();
-
   EXPECT_TRUE( text == passkey );
 }
 

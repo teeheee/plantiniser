@@ -3,6 +3,8 @@
 
 #include <string>
 
+typedef void (*mqtt_sub_callback_t)(std::string payload);
+
 class hal_mqtt {
 public:
     virtual void init(std::string ssid, std::string pass, std::string server) = 0;
@@ -12,6 +14,10 @@ public:
 };
 
 class hal_mqtt_impl : public hal_mqtt{
+    void init(std::string ssid, std::string pass, std::string server);
+    void pub(std::string topic, std::string payload);
+    void sub(std::string topic, mqtt_sub_callback_t callback);
+    void process();
 };
 
 #endif

@@ -18,7 +18,7 @@ class ConfigManage{
             list_of_config_items.push_back(&wifi_passkey);
             list_of_config_items.push_back(&server_address);
         }
-        void proccess(hal_ui* ui);
+        void process(hal_ui* ui);
         std::string get_wifi_ssid();
         std::string get_wifi_passkey();
         std::string get_server_address();

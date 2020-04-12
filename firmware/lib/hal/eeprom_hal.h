@@ -14,6 +14,10 @@ public:
 };
 
 class hal_eeprom_impl : public hal_eeprom{
+    void init();
+    void update();
+    void put(uint8_t* byte, int length, int address);
+    void get(uint8_t* byte, int length, int address);
 };
 
 #endif

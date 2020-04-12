@@ -34,7 +34,8 @@ public:
     {
         if(data_size >= content.length())
         {
-            memcpy(data_pointer, content.data(), content.length());
+            memcpy(data_pointer, content.c_str(), content.length());
+            memset(&data_pointer[content.length()], 0, data_size-content.length());
             update();
         }
     }
@@ -69,6 +70,8 @@ public:
                 case ENC_SHORT_PRESS:
                     position++;
                     change = 1;
+                    break;
+                default:
                     break;
             }
         }

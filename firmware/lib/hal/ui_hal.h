@@ -21,6 +21,13 @@ public:
 };
 
 class hal_ui_impl : public hal_ui{
+    void init();
+    void print(const char* text);
+    void print(int text);
+    void print_at(int line, const char* text);
+    void clear();
+    encoder_event_t get_event();
+    void process();
 };
 
 #endif

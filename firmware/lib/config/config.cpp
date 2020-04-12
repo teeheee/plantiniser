@@ -1,7 +1,7 @@
 #include "config.h"
 #include <string>
 
-void ConfigManage::proccess(hal_ui* ui)
+void ConfigManage::process(hal_ui* ui)
 {
     for(auto const& config_item : list_of_config_items)
     {

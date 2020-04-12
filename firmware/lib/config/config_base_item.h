@@ -78,11 +78,12 @@ protected:
         uint8_t checksum = 0;
         for(int i = 0; i < datasize; i++)
             checksum ^= data[i];
+        return checksum;
     }
 
     uint8_t* data_pointer;
-    int data_size;
-    int address;
+    unsigned int data_size;
+    unsigned int address;
     bool valid_data;
     const char* description;
     hal_eeprom* eeprom_ptr;

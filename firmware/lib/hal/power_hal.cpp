@@ -23,7 +23,7 @@ void hal_power_impl::init()
   update_states();
 }
 
-void hal_power_impl::set(int pin, int state)
+void hal_power_impl::set(int pin, bool state)
 {
   if(state)
   {

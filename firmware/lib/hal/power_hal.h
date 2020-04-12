@@ -8,6 +8,8 @@ public:
 };
 
 class hal_power_impl : public hal_power{
+    void init();
+    void set(int pin, bool state);
 };
 
 #endif
