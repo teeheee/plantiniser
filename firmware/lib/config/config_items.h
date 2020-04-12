@@ -2,7 +2,7 @@
 #define _CONFIG_ITEMS_
 
 #include "config_base_item.h"
-#include "config_hal.h"
+#include "eeprom_hal.h"
 #include "ui_hal.h"
 
 #include <string>

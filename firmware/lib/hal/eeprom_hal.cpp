@@ -1,6 +1,6 @@
 #ifndef __TEST__
 
-#include "config_hal.h"
+#include "eeprom_hal.h"
 #include "EEPROM.h"
 
 void hal_eeprom_impl::init()

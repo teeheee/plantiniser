@@ -4,13 +4,14 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
-#include "config_hal.h"
+#include "eeprom_hal.h"
 #include "ui_hal.h"
 
 class ConfigBaseItem
 {
     public:
         virtual void config_user_interface(hal_ui* user_interface) = 0;
+        virtual bool is_data_valid() = 0;
 };
 
 template <class T> class ConfigBaseItem_Template : public ConfigBaseItem{

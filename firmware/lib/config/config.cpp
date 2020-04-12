@@ -32,3 +32,13 @@ std::string ConfigManage::get_server_address()
     else
         return std::string("");
 }
+
+bool ConfigManage::all_valid()
+{
+    for(auto const& config_item : list_of_config_items)
+    {
+        if(config_item->is_data_valid() == false)
+            return false;
+    }
+    return true;
+}

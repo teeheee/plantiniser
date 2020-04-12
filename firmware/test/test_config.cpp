@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include "config_items.h"
 #include "config_base_item.h"
-#include "config_hal.h"
+#include "eeprom_hal.h"
 #include <string>
 #include <string.h>
 
