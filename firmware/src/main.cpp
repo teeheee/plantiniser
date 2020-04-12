@@ -5,7 +5,6 @@
 #include "display.h"
 #include "time_man.h"
 
-
 const char* ssid = "Karl-Marx-Stadt";
 const char* password = "penisrofelcopter88";
 const char* mqtt_server = "doerte";
