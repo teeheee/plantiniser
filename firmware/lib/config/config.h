@@ -10,9 +10,9 @@
 class ConfigManage{
     public:
         ConfigManage(hal_eeprom* eeprom): 
-            wifi_ssid(eeprom, 0, 5, "WLAN SSID"),
-            wifi_passkey(eeprom, 0, 5, "WLAN SSID"),
-            server_address(eeprom, 0, 5, "WLAN SSID")
+            wifi_ssid(eeprom, 0, 25, "WLAN SSID"),
+            wifi_passkey(eeprom, 40, 25, "WLAN Passkey"),
+            server_address(eeprom, 80, 25, "MQTT Server Address")
         {
             list_of_config_items.push_back(&wifi_ssid);
             list_of_config_items.push_back(&wifi_passkey);

@@ -22,37 +22,29 @@ void hal_ui_impl::init()
     u8g2.setFont(u8g2_font_tom_thumb_4x6_mf);	// set the font for the terminal window
     u8g2log.begin(u8g2, U8LOG_WIDTH, U8LOG_HEIGHT, u8log_buffer);
     u8g2log.setLineHeightOffset(0);	// set extra space between lines in pixel, this can be negative
-    u8g2log.setRedrawMode(0);	
+    u8g2log.setRedrawMode(1);	
 }
 
 void hal_ui_impl::print(const char* text)
 {
     u8g2log.print(text);
-    Serial.print("LCD: ");
-    Serial.println(text);
 }
 
 void hal_ui_impl::print(int text)
 {
     u8g2log.print(text);
-    Serial.print("LCD: ");
-    Serial.println(text);
 }
 
 void hal_ui_impl::print_at(int line, const char* text)
 {
     u8g2.setFont(u8g2_font_ncenB08_tf);
-    u8g2.drawStr(0, 10,"penisrofelcopter88");
-    u8g2.drawStr(0, 20,"hello world");
-    u8g2.drawStr(0, 30,"hello world");
-    u8g2.drawStr(0, 40,"hello world");
+    u8g2.drawStr(0, 10*line, text);
     u8g2.nextPage();
-    Serial.print("LCD: ");
-    Serial.println(text);
 }
 
 void hal_ui_impl::clear()
 {
+    u8g2.clear();
     u8g2log.print("\f");
 }
 
@@ -63,37 +55,78 @@ encoder_event_t hal_ui_impl::get_event()
     return tmp;
 }
 
+int encoder_state()
+{
+  uint16_t value = analogRead(A0);
+  if(value < 320)
+  {
+    return 1;
+  }
+  else if(value < 400)
+  {
+    return 2;
+  }
+  else if(value < 1000)
+  {
+    return 3;
+  }
+  else
+  {
+    return 0;
+  }
+}
+
 void hal_ui_impl::process()
 {
-  static int state_plus = 0;
-  static int state_minus = 0;
-  uint16_t value = analogRead(A0);
-
-  if(value < 320 && (state_plus == 0))
+  static int rot = 0;
+  static int last_enc_state = 0;
+  static int was_pressed = 0;
+  if(! digitalRead(D0) && was_pressed == 0)
   {
-    state_plus++;
+    last_event = ENC_SHORT_PRESS;
+    was_pressed = 1;
   }
-  else if(value < 400 && (state_plus == 1))
+  else if(digitalRead(D0) && was_pressed == 1)
   {
-    state_plus++;
+    was_pressed = 0;
   }
-  else if(value < 1000 && (state_plus == 2))
+  
+  int enc_state = encoder_state();
+  if(enc_state && last_enc_state != enc_state)
   {
-    state_plus++;
-  }
-
-  if(value >= 1000) //no step
-  {
-    if(state_plus == 3)
+    /*Serial.print(" ");
+    Serial.print(enc_state);
+    Serial.print(" ");
+    Serial.println(rot);*/
+    if(enc_state == 2 && rot == 0)
     {
+      rot++;
+    }
+    else if(enc_state == 3 && rot == 0)
+    {
+      rot--;
+    }
+    else if(enc_state == 1 && (rot == 1 || rot == -1))
+    {
+      rot += rot;
+    }
+    else if(enc_state == 3 && rot == 2)
+    {
+      //Serial.println("ENC_ROTATE_PLUS");
       last_event = ENC_ROTATE_PLUS;
+      rot = 0;
     }
-    if(state_minus == 3)
+    else if(enc_state == 2 && rot == -2)
     {
-       last_event = ENC_ROTATE_MINUS;
+      //Serial.println("ENC_ROTATE_MINUS");
+      last_event = ENC_ROTATE_MINUS;
+      rot = 0;
     }
-    state_plus = 0;
-    state_minus = 0;
+    else
+    {
+      rot = 0;
+    }
+    last_enc_state = enc_state;
   }
 }
 

@@ -1,9 +1,15 @@
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+
 #include "config_items.h"
 #include "config_base_item.h"
+#include "config.h"
+
 #include "eeprom_hal.h"
+#include "ui_hal.h"
+
 #include <string>
+#include <queue>
 #include <string.h>
 
 #define EEPROM_SIZE 1024
@@ -38,6 +44,40 @@ class mock_hal_eeprom : public hal_eeprom
 };
 
 mock_hal_eeprom eeprom;
+
+class mock_hal_ui : public hal_ui{
+  public:
+    std::queue<encoder_event_t> envent_list;
+    void add_event(encoder_event_t event)
+    {
+      envent_list.push(event);
+    }
+    void init()
+    {
+      while(envent_list.size() > 0)
+        envent_list.pop();
+    }
+    void print(const char* text){}
+    void print(int text){}
+    void print_at(int line, const char* text){}
+    void clear(){}
+    encoder_event_t get_event()
+    {
+      if(envent_list.size() > 0)
+      {
+        encoder_event_t tmp = envent_list.front();
+        envent_list.pop();
+        return tmp;
+      }
+      else
+      {
+        return ENC_NO_EVENT;  
+      }
+    }
+    void process(){}
+};
+
+mock_hal_ui ui;
 
 uint8_t calc_checksum(uint8_t* data, int datasize)
 {
@@ -81,6 +121,19 @@ TEST(StringItem, read_write)
   std::string text = wlan_ssid.read_data();
   EXPECT_TRUE( text == passkey );
 }
+
+TEST(ConfigManage, SetSSID)
+{
+  eeprom.clear();
+  ui.init();
+  for(int i = 0; i < 20; i++)
+    ui.add_event(ENC_SHORT_PRESS);
+
+  eeprom.init();
+  ConfigManage manage(&eeprom);
+  manage.process(&ui);
+}
+
 
 int main(int argc, char** argv) {
   ::testing::InitGoogleTest(&argc, argv);

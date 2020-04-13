@@ -18,18 +18,27 @@ void callback(char* topic, byte* payload, unsigned int length)
     //TODO
 }
 
-void hal_mqtt_impl::init(std::string ssid, std::string pass, std::string server)
+bool hal_mqtt_impl::init(std::string ssid, std::string pass, std::string server)
 {
     delay(10);
     topic_index = 0;
     WiFi.begin(ssid.c_str(), pass.c_str());
+    int timeout_counter = 0;
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
+        timeout_counter++;
+        if(timeout_counter == 10)
+        {
+            is_initialized_flag = false;
+            return false;
+        }
     }
     randomSeed(micros());
     IPAddress ip = WiFi.localIP();
     client.setServer(server.c_str(), 1883);
     client.setCallback(callback);
+    is_initialized_flag = true;
+    return true;
 }
 
 void hal_mqtt_impl::pub(std::string topic, std::string payload)
@@ -75,6 +84,17 @@ void hal_mqtt_impl::process()
     }
     client.loop();
     delay(10);
+}
+
+
+bool hal_mqtt_impl::is_initalized()
+{
+    return is_initialized_flag;
+}
+
+bool hal_mqtt_impl::is_connected()
+{
+    return client.connected();
 }
 
 #endif

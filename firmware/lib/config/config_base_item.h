@@ -36,7 +36,7 @@ public:
         memset(data_pointer, 0, data_size);
         eeprom_ptr->get(data_pointer, data_size, address_counter);
         uint8_t real_checksum = calc_checksum(data_pointer, data_size);
-        if(real_checksum != checksum)
+        if(real_checksum != checksum || data_pointer[0]==0xff)
         {
             memset(data_pointer, 0, data_size);
             valid_data = false;

@@ -21,7 +21,8 @@ public:
 };
 
 class hal_ui_impl : public hal_ui{
-    void init();
+public:
+    void init() override;
     void print(const char* text);
     void print(int text);
     void print_at(int line, const char* text);

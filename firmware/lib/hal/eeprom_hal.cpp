@@ -25,7 +25,7 @@ void hal_eeprom_impl::get(uint8_t* byte, int length, int address)
 {
     for(int i = 0; i < length; i++)
     {
-        EEPROM.put(address+i, byte[i]);
+        EEPROM.get(address+i, byte[i]);
     }
 }
 
