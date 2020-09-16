@@ -1,5 +1,5 @@
-#ifndef _CONFIG_HAL_H_
-#define _CONFIG_HAL_H_
+#ifndef _EEPROM_HAL_H_
+#define _EEPROM_HAL_H_
 
 #include <stdint.h>
 

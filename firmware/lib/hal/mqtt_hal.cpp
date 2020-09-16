@@ -64,9 +64,6 @@ void hal_mqtt_impl::process()
 {
     if (!client.connected()) 
     {
-        // Loop until we're reconnected
-        while (!client.connected()) 
-        {
             //Serial.print("connect to...");
             // Create a random client ID
             String clientId = "ESP8266Client-";
@@ -76,14 +73,11 @@ void hal_mqtt_impl::process()
             {
                 //Serial.println("connected");
             } 
-            else 
-            {
-                delay(5000);
-            }
-        }
     }
-    client.loop();
-    delay(10);
+    else
+    {
+        client.loop();
+    }
 }
 
 

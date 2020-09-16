@@ -4,9 +4,11 @@
 #include <string>
 #include <time.h>
 
+
 class hal_time {
 public:
     virtual void init() = 0;
+    virtual bool is_valid() = 0;
     virtual int get_hours() = 0;
     virtual int get_minutes() = 0;
     virtual int get_day() = 0;
@@ -17,6 +19,7 @@ public:
 class hal_time_impl : public hal_time{
 public:
     void init();
+    bool is_valid();
     int get_hours();
     int get_minutes();
     int get_day();

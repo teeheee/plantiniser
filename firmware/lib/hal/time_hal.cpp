@@ -7,16 +7,33 @@
 void hal_time_impl::init()
 {
     configTime(0, 0, "pool.ntp.org", "time.nist.gov");
-    setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 0);          // 
-    while (!time(nullptr))
+    setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 0); 
+    now = 0;
+}
+
+bool hal_time_impl::is_valid()
+{
+    if(now)
     {
-        delay(100);
+        return true;
+    }
+    else
+    {
+        return false;
     }
 }
 
 void hal_time_impl::process()
 {
-   now = time(nullptr);
+    time_t tmp_now = time(nullptr);
+    if(tmp_now)
+    {
+        now = tmp_now;
+    }
+    else if(now)
+    {
+        now++;
+    }
 }
 
 int hal_time_impl::get_hours()

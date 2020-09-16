@@ -1,9 +1,6 @@
 #ifndef _CONFIG_ITEMS_
 #define _CONFIG_ITEMS_
 
-
-#include <ESP8266WiFi.h>
-
 #include "config_base_item.h"
 #include "eeprom_hal.h"
 #include "ui_hal.h"
@@ -71,16 +68,10 @@ public:
         uint8_t change = 1;
         while(1)
         {
-            yield();
             ui->process();
             if(change)
             {
                 change = 0;
-                Serial.print(position);
-                Serial.print(" ");
-                Serial.print(character_index[position]);
-                Serial.print(" ");
-                Serial.println(current_value.c_str());
                 ui->clear();
                 ui->print_at(1, (const char*)description);
                 ui->print_at(2, (const char*)current_value.c_str());

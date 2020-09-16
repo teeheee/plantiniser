@@ -1,65 +1,49 @@
 #ifdef _TEST_
 
 #include <ESP8266WiFi.h>
+#include <time_hal.h>
+#include <mqtt_hal.h>
+#include <scheduler_hal.h>
 
-#include "ui_hal.h"
-#include "eeprom_hal.h"
+hal_mqtt* mqtt; 
+hal_time* rtc;
+hal_scheduler* scheduler;
 
-hal_ui_impl ui;
-hal_eeprom_impl eeprom;
+void show_time_task()
+{
+    if(rtc->is_valid())
+    {
+        Serial.println(rtc->get_formated().c_str());
+    }
+}
+
+void rtc_process()
+{
+    rtc->process();
+}
+
+void mqtt_process()
+{
+    mqtt->process();
+}
 
 void setup() 
 {
-  Serial.begin(115200);
-  Serial.println("start");
-  ui.init();
-  ui.print("start");
-  Serial.println("ui init");
-  eeprom.init();
-  Serial.println("eeprom init");
-  eeprom.update();
-  uint8_t x = 42;
-  //eeprom.put(&x, 1, 0);
-  eeprom.update();
-  uint8_t y = 3;
-  eeprom.get(&y, 1, 0);
-  Serial.println(y);
+    mqtt = new hal_mqtt_impl(); 
+    rtc = new hal_time_impl(); 
+    scheduler = new hal_scheduler_impl();
+    Serial.begin(115200);
+    mqtt->init("Karl-Marx-Stadt", "penisrofelcopter88", "oberjoch-ulbrich.de");
+    scheduler->init();
+    rtc->init();
+    scheduler->run_task(1000, rtc_process, 2);
+    scheduler->run_task(801, show_time_task, 3);
+    scheduler->run_task(7, mqtt_process, 1);
 }
 
 void loop() 
 {
-    static uint8_t change = 0;
-    static uint8_t count = 42;
-    ui.process();
-    if(change)
-    {
-        Serial.println("change");
-        change = 0;
-        ui.clear();
-        ui.print("hello world\n");
-        ui.print(count);
-    }
-    switch(ui.get_event())
-    {
-        case ENC_ROTATE_PLUS:
-            count++;
-            change = 1;
-            break;
-        case ENC_ROTATE_MINUS:
-            count--;
-            change = 1;
-            break;
-        case ENC_SHORT_PRESS:
-            count = 0;
-            change = 1;
-            break;
-        case ENC_LONG_PRESS:
-            count = 100;
-            change = 1;
-            break;
-        default:
-            break;
-    }
+    scheduler->process();
 }
 
 #endif
