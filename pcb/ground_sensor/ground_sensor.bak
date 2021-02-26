@@ -1,0 +1,252 @@
+EESchema Schematic File Version 4
+LIBS:ground_sensor-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L MCU_Microchip_ATtiny:ATtiny85V-10SU U?
+U 1 1 601EF4EF
+P 5700 2800
+F 0 "U?" H 5170 2846 50  0000 R CNN
+F 1 "ATtiny85V-10SU" H 5170 2755 50  0000 R CNN
+F 2 "Package_SO:SOIJ-8_5.3x5.3mm_P1.27mm" H 5700 2800 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/atmel-2586-avr-8-bit-microcontroller-attiny25-attiny45-attiny85_datasheet.pdf" H 5700 2800 50  0001 C CNN
+	1    5700 2800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Battery_Cell BT?
+U 1 1 601EF6B9
+P 2200 5800
+F 0 "BT?" H 2318 5896 50  0000 L CNN
+F 1 "Battery_Cell" H 2318 5805 50  0000 L CNN
+F 2 "" V 2200 5860 50  0001 C CNN
+F 3 "~" V 2200 5860 50  0001 C CNN
+	1    2200 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L RF:NRF24L01_Breakout U?
+U 1 1 601EFA4A
+P 9050 2750
+F 0 "U?" H 9528 2728 50  0000 L CNN
+F 1 "NRF24L01_Breakout" H 9528 2637 50  0000 L CNN
+F 2 "RF_Module:nRF24L01_Breakout" H 9200 3350 50  0001 L CIN
+F 3 "http://www.nordicsemi.com/eng/content/download/2730/34105/file/nRF24L01_Product_Specification_v2_0.pdf" H 9050 2650 50  0001 C CNN
+	1    9050 2750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 2600 6400 2600
+Wire Wire Line
+	6300 2500 6400 2500
+Text GLabel 6400 2500 2    50   Input ~ 0
+MOSI
+Text GLabel 6400 2600 2    50   Input ~ 0
+MISO_Charge
+Wire Wire Line
+	6300 2700 6400 2700
+Text GLabel 6400 2700 2    50   Input ~ 0
+SCK
+Wire Wire Line
+	6300 2800 6400 2800
+Text GLabel 6400 2800 2    50   Input ~ 0
+ADC3
+Wire Wire Line
+	6300 2900 6400 2900
+Text GLabel 6400 2900 2    50   Input ~ 0
+Enable
+$Comp
+L ROCCI:NMOS_BSS138 Q?
+U 1 1 601F9F50
+P 9050 3750
+F 0 "Q?" H 9158 3803 60  0000 L CNN
+F 1 "NMOS_BSS138" H 9158 3697 60  0000 L CNN
+F 2 "digikey-footprints:SOT-23-3" H 9250 3950 60  0001 L CNN
+F 3 "" H 9250 4050 60  0001 L CNN
+F 4 "BSS138CT-ND" H 9250 4150 60  0001 L CNN "Digi-Key_PN"
+F 5 "BSS138" H 9250 4250 60  0001 L CNN "MPN"
+F 6 "Discrete Semiconductor Products" H 9250 4350 60  0001 L CNN "Category"
+F 7 "Transistors - FETs, MOSFETs - Single" H 9250 4450 60  0001 L CNN "Family"
+F 8 "https://www.onsemi.com/pub/Collateral/BSS138-D.PDF" H 9250 4550 60  0001 L CNN "DK_Datasheet_Link"
+F 9 "/product-detail/en/on-semiconductor/BSS138/BSS138CT-ND/244294" H 9250 4650 60  0001 L CNN "DK_Detail_Page"
+F 10 "MOSFET N-CH 50V 220MA SOT-23" H 9250 4750 60  0001 L CNN "Description"
+F 11 "ON Semiconductor" H 9250 4850 60  0001 L CNN "Manufacturer"
+F 12 "Active" H 9250 4950 60  0001 L CNN "Status"
+	1    9050 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 3350 9050 3450
+Wire Wire Line
+	9050 3450 8350 3450
+Wire Wire Line
+	8350 3450 8350 2750
+Wire Wire Line
+	8350 2750 8550 2750
+Connection ~ 9050 3450
+Wire Wire Line
+	9050 3450 9050 3550
+Wire Wire Line
+	8750 3850 8400 3850
+Text GLabel 8400 3850 0    50   Input ~ 0
+Enable
+$Comp
+L power:GND #PWR?
+U 1 1 601FA2CC
+P 9050 4000
+F 0 "#PWR?" H 9050 3750 50  0001 C CNN
+F 1 "GND" H 9055 3827 50  0000 C CNN
+F 2 "" H 9050 4000 50  0001 C CNN
+F 3 "" H 9050 4000 50  0001 C CNN
+	1    9050 4000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 4000 9050 3950
+Text GLabel 8350 2450 0    50   Input ~ 0
+MOSI
+Text GLabel 8350 2550 0    50   Input ~ 0
+MISO_Charge
+Text GLabel 8350 2650 0    50   Input ~ 0
+SCK
+Wire Wire Line
+	8350 2650 8550 2650
+Wire Wire Line
+	8350 2550 8550 2550
+Wire Wire Line
+	8350 2450 8550 2450
+$Comp
+L power:VCC #PWR?
+U 1 1 601FA6CF
+P 9050 1950
+F 0 "#PWR?" H 9050 1800 50  0001 C CNN
+F 1 "VCC" H 9067 2123 50  0000 C CNN
+F 2 "" H 9050 1950 50  0001 C CNN
+F 3 "" H 9050 1950 50  0001 C CNN
+	1    9050 1950
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	9050 1950 9050 2150
+$Comp
+L power:VCC #PWR?
+U 1 1 601FAC00
+P 5700 2000
+F 0 "#PWR?" H 5700 1850 50  0001 C CNN
+F 1 "VCC" H 5717 2173 50  0000 C CNN
+F 2 "" H 5700 2000 50  0001 C CNN
+F 3 "" H 5700 2000 50  0001 C CNN
+	1    5700 2000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 601FAC2F
+P 5700 3500
+F 0 "#PWR?" H 5700 3250 50  0001 C CNN
+F 1 "GND" H 5705 3327 50  0000 C CNN
+F 2 "" H 5700 3500 50  0001 C CNN
+F 3 "" H 5700 3500 50  0001 C CNN
+	1    5700 3500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5700 3400 5700 3500
+Wire Wire Line
+	5700 2200 5700 2000
+Wire Wire Line
+	6300 3000 6400 3000
+Text GLabel 6400 3000 2    50   Input ~ 0
+RESET
+$Comp
+L Connector:AVR-ISP-6 J?
+U 1 1 601FB0FA
+P 2250 2800
+F 0 "J?" H 1970 2896 50  0000 R CNN
+F 1 "AVR-ISP-6" H 1970 2805 50  0000 R CNN
+F 2 "" V 2000 2850 50  0001 C CNN
+F 3 " ~" H 975 2250 50  0001 C CNN
+	1    2250 2800
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2650 2700 2750 2700
+Wire Wire Line
+	2650 2600 2750 2600
+Text GLabel 2750 2700 2    50   Input ~ 0
+MOSI
+Text GLabel 2750 2600 2    50   Input ~ 0
+MISO_Charge
+Wire Wire Line
+	2650 2800 2750 2800
+Text GLabel 2750 2800 2    50   Input ~ 0
+SCK
+Wire Wire Line
+	2650 2900 2750 2900
+Text GLabel 2750 2900 2    50   Input ~ 0
+RESET
+$Comp
+L power:VCC #PWR?
+U 1 1 601FC117
+P 2150 2100
+F 0 "#PWR?" H 2150 1950 50  0001 C CNN
+F 1 "VCC" H 2167 2273 50  0000 C CNN
+F 2 "" H 2150 2100 50  0001 C CNN
+F 3 "" H 2150 2100 50  0001 C CNN
+	1    2150 2100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 2300 2150 2100
+$Comp
+L power:GND #PWR?
+U 1 1 601FC3FE
+P 2150 3300
+F 0 "#PWR?" H 2150 3050 50  0001 C CNN
+F 1 "GND" H 2155 3127 50  0000 C CNN
+F 2 "" H 2150 3300 50  0001 C CNN
+F 3 "" H 2150 3300 50  0001 C CNN
+	1    2150 3300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2150 3200 2150 3300
+$Comp
+L power:VCC #PWR?
+U 1 1 601FC829
+P 2200 5400
+F 0 "#PWR?" H 2200 5250 50  0001 C CNN
+F 1 "VCC" H 2217 5573 50  0000 C CNN
+F 2 "" H 2200 5400 50  0001 C CNN
+F 3 "" H 2200 5400 50  0001 C CNN
+	1    2200 5400
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 5600 2200 5400
+$Comp
+L power:GND #PWR?
+U 1 1 601FCB86
+P 2200 6000
+F 0 "#PWR?" H 2200 5750 50  0001 C CNN
+F 1 "GND" H 2205 5827 50  0000 C CNN
+F 2 "" H 2200 6000 50  0001 C CNN
+F 3 "" H 2200 6000 50  0001 C CNN
+	1    2200 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2200 5900 2200 6000
+$EndSCHEMATC
