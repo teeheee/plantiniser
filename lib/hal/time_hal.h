@@ -26,6 +26,8 @@ public:
     std::string get_formated();
     void process();
 private:
+    void update_rtc(time_t new_time);
+    time_t load_rtc();
     time_t now;
 };
 
