@@ -111,4 +111,73 @@ public:
     }
 };
 
+class NumberItem : public ConfigBaseItem_Template<int>{
+private:
+
+public:
+    NumberItem() : ConfigBaseItem_Template() {}
+
+    NumberItem(hal_eeprom *eeprom_pointer, int a_address, const char* a_description) 
+    : ConfigBaseItem_Template(eeprom_pointer, a_address, 4, a_description)
+    {
+
+    }
+
+    int read_data()
+    {
+        if(is_data_valid())
+        {
+            return *((int*)data_pointer);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    
+    void write_data(int content)
+    {
+        memcpy(data_pointer, &content, sizeof(int));
+        memset(&data_pointer[sizeof(int)], 0, data_size-sizeof(int));
+        update();
+    }
+
+    void config_user_interface(hal_ui* ui)
+    {
+        ui->clear();
+        int current_value = read_data();
+        uint8_t change = 1;
+        while(1)
+        {
+            ui->process();
+            if(change)
+            {
+                change = 0;
+                ui->clear();
+                ui->print_at(1, (const char*)description);
+                char buffer[10];
+                itoa(current_value, buffer, 10);
+                ui->print_at(2, buffer);
+                ui->print_at(3, "submit?");
+            }
+            switch(ui->get_event())
+            {
+                case ENC_ROTATE_PLUS:
+                    current_value++;
+                    change = 1;
+                    break;
+                case ENC_ROTATE_MINUS:
+                    current_value--;
+                    change = 1;
+                    break;
+                case ENC_SHORT_PRESS:
+                    write_data(current_value);
+                    return;
+                default:
+                    break;
+            }
+        }
+    }
+};
+
 #endif

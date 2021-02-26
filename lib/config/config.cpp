@@ -33,6 +33,30 @@ std::string ConfigManage::get_server_address()
         return std::string("");
 }
 
+int ConfigManage::get_water_valve_on_hour()
+{
+    if(water_valve_on_hour.is_data_valid())
+        return water_valve_on_hour.read_data();
+    else
+        return 0;
+}
+
+int ConfigManage::get_water_valve_on_minute()
+{
+    if(water_valve_on_minute.is_data_valid())
+        return water_valve_on_minute.read_data();
+    else
+        return 0;
+}
+
+int ConfigManage::get_water_valve_on_duration()
+{
+    if(water_valve_on_duration.is_data_valid())
+        return water_valve_on_duration.read_data();
+    else
+        return 0;
+}
+
 bool ConfigManage::all_valid()
 {
     for(auto const& config_item : list_of_config_items)

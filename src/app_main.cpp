@@ -49,9 +49,10 @@ void setup()
 
 void minute_tick(int minute, int hour)
 {
-  if(minute == 15 && hour == 7)
+  if(minute == config_manage->get_water_valve_on_minute() 
+  && hour == config_manage->get_water_valve_on_hour())
   {
-    g_pump_timeout = 5;
+    g_pump_timeout = config_manage->get_water_valve_on_duration();
   }
   if(g_pump_timeout)
   {
