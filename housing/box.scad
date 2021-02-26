@@ -38,7 +38,7 @@
   
 /* [Box options] */
 // Pieds PCB - PCB feet (x4) 
-  PCBFeet       = 1;// [0:No, 1:Yes]
+  PCBFeet       = 0;// [0:No, 1:Yes]
 // - Decorations to ventilation holes
   Vent          = 0;// [0:No, 1:Yes]
 // - Decoration-Holes width (in mm)
@@ -78,13 +78,13 @@ FootHole        = 3;
 //Coque haut - Top shell
   TShell        = 1;// [0:No, 1:Yes]
 //Coque bas- Bottom shell
-  BShell        = 1;// [0:No, 1:Yes]
+  BShell        = 0;// [0:No, 1:Yes]
 //Panneau arrière - Back panel  
-  BPanel        = 1;// [0:No, 1:Yes]
+  BPanel        = 0;// [0:No, 1:Yes]
 //Panneau avant - Front panel
-  FPanel        = 1;// [0:No, 1:Yes]
+  FPanel        = 0;// [0:No, 1:Yes]
 //Texte façade - Front text
-  Text          = 1;// [0:No, 1:Yes]
+  Text          = 0;// [0:No, 1:Yes]
 
 
   
@@ -351,9 +351,18 @@ if(TShell==1)
 color( Couleur1,1){
     translate([0,Width,Height+0.2]){
         rotate([0,180,180]){
-                Coque();
+                difference()
+                {
+                    Coque();
+                    union()
+                    {
+                        translate([40,15,0])cube([40,30,60]);
+                        translate([20,25,0])cylinder(60,10);
+                        
+                    }
                 }
-        }
+            }
+      }
 }
 
 if (PCBFeet==1)
