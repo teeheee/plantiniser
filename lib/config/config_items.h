@@ -5,8 +5,18 @@
 #include "eeprom_hal.h"
 #include "ui_hal.h"
 
+#include <sstream>
 #include <string>
-#include <string.h>
+
+/**
+ * @brief this is a fix for the arm gcc toolchain not supporting tostring even if std=c11 is enabled
+ */
+template<class T>
+std::string toString(const T &value) {
+    std::ostringstream os;
+    os << value;
+    return os.str();
+}
 
 #define VALID_CHAR_LIST_LENGTH 83
 const char valid_character_list[] = "\0abcdefghijklmnopqrstuvwxyz0123456789!§$%&/()=?*+#-_.:,;ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
@@ -155,9 +165,8 @@ public:
                 change = 0;
                 ui->clear();
                 ui->print_at(1, (const char*)description);
-                char buffer[10];
-                itoa(current_value, buffer, 10);
-                ui->print_at(2, buffer);
+                std::string text = toString(current_value);
+                ui->print_at(2, text.c_str());
                 ui->print_at(3, "submit?");
             }
             switch(ui->get_event())
