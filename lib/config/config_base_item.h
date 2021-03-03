@@ -10,12 +10,18 @@
 class ConfigBaseItem
 {
     public:
-        virtual void config_user_interface(hal_ui* user_interface) = 0;
+        enum type_t {
+            CONFIG_STRING_TYPE,
+            CONFIG_NUMBER_TYPE
+        };
+        type_t type;
         virtual bool is_data_valid() = 0;
 };
 
 template <class T> class ConfigBaseItem_Template : public ConfigBaseItem{
+
 public:
+
     ConfigBaseItem_Template()
     {
 
@@ -56,9 +62,15 @@ public:
     {
         return valid_data;
     }
+    
     const char* get_description()
     {
         return description;
+    }
+
+    unsigned int get_data_size()
+    {
+        return data_size;
     }
 
     virtual T read_data() = 0;

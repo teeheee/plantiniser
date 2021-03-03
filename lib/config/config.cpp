@@ -1,13 +1,6 @@
 #include "config.h"
 #include <string>
 
-void ConfigManage::process(hal_ui* ui)
-{
-    for(auto const& config_item : list_of_config_items)
-    {
-        config_item->config_user_interface(ui);
-    }
-}
 
 std::string ConfigManage::get_wifi_ssid()
 {
@@ -65,4 +58,10 @@ bool ConfigManage::all_valid()
             return false;
     }
     return true;
+}
+
+
+std::list<ConfigBaseItem*>* ConfigManage::get_config_item_list()
+{
+    return &list_of_config_items;
 }

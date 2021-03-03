@@ -5,7 +5,6 @@
 #include <list>
 #include "config_items.h"
 #include "eeprom_hal.h"
-#include "ui_hal.h"
 
 class ConfigManage{
     public:
@@ -24,7 +23,6 @@ class ConfigManage{
             list_of_config_items.push_back(&water_valve_on_minute);
             list_of_config_items.push_back(&water_valve_on_duration);
         }
-        void process(hal_ui* ui);
         std::string get_wifi_ssid();
         std::string get_wifi_passkey();
         std::string get_server_address();
@@ -32,6 +30,7 @@ class ConfigManage{
         int get_water_valve_on_minute();
         int get_water_valve_on_duration();
         bool all_valid();
+        std::list<ConfigBaseItem*>* get_config_item_list();
     private:
         StringItem wifi_ssid;
         StringItem wifi_passkey;
