@@ -1,6 +1,9 @@
 pipeline {
     agent {
-        docker { image 'infinitecoding/platformio-for-ci' }
+        docker { 
+           image 'infinitecoding/platformio-for-ci' 
+           args '-u root:root'
+        }
     }
     stages {
         stage('Build') {
