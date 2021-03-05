@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'sglahn/platformio-core' }
+        docker { image 'infinitecoding/platformio-for-ci' }
     }
     stages {
         stage('Build') {
