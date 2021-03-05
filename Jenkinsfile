@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        docker { image 'eclipse/platformio' }
+        docker { image 'shaguarger/platformio' }
     }
     stages {
         stage('Build') {
