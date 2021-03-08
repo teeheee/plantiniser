@@ -15,12 +15,9 @@ pipeline {
         stage ('Deploy firmware') {
             agent any
             steps{
-                script {
-                    commitId = sh(returnStdout: true, script: 'git rev-list --count HEAD') 
-                }
                 sshagent(credentials : ['alex_sshkey'])
                 {
-                    sh 'scp -o StrictHostKeyChecking=no ./.pio/build/main/firmware.bin alex@192.168.178.2:~/plantiniser_firmware_provider/opt/${commitId}.bin'
+                    sh 'scp -o StrictHostKeyChecking=no ./.pio/build/main/firmware.bin alex@192.168.178.2:~/plantiniser_firmware_provider/opt/${git rev-list --count HEAD}.bin'
                 }
             }
         }
