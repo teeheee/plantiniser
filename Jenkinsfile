@@ -20,7 +20,7 @@ pipeline {
                 }
                 sshagent(credentials : ['alex'])
                 {
-                    sh 'scp ./.pio/build/main/firmware.bin alex@host:~/plantiniser_firmware_provider/opt/'+commitId+'.bin'
+                    sh 'scp ./.pio/build/main/firmware.bin alex@doerte:~/plantiniser_firmware_provider/opt/'+commitId+'.bin'
                 }
             }
         }
