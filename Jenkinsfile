@@ -17,7 +17,7 @@ pipeline {
                 VERSION = """${sh (
                     script: 'git rev-list --count HEAD',
                     returnStdout: true
-                )}"""
+                ).trim()}"""
             }
             agent any
             steps{
