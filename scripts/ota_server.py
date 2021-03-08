@@ -6,7 +6,7 @@ from bottle import run, static_file, response, get
 OTA_GET_VERSION_ENDPOINT = "/version"
 OTA_GET_FIRMWARE_ENDPOINT = "/firmware"
 OTA_FIRMWARE_DIR = "opt"
-OTA_SERVER_PORT = 8266
+OTA_SERVER_PORT = 80
 FIRMWARE_FILE_EXTENSION = '.bin'
 
 
