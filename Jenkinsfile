@@ -1,11 +1,5 @@
 pipeline {
     agent none
-    environment {
-        VERSION = """${sh (
-            script: 'git rev-list --count HEAD',
-            returnStdout: true
-        )}"""
-    }
     stages {
         stage('Building firmware') {
             agent {
@@ -19,6 +13,12 @@ pipeline {
             }
         }
         stage ('Deploy firmware') {
+            environment {
+                VERSION = """${sh (
+                    script: 'git rev-list --count HEAD',
+                    returnStdout: true
+                )}"""
+            }
             agent any
             steps{
                 sshagent(credentials : ['alex_sshkey'])
