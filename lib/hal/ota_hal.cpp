@@ -11,7 +11,7 @@
 #define FW_VERSION toString(VERSION).c_str()
 //////////////////////////////////////
 
-#define OTA_SERVER_URL "http://192.168.178.32:8266"
+#define OTA_SERVER_URL "http://repo.oberjoch-ulbrich.de"
 #define OTA_GET_VERSION_ENDPOINT "/version"
 #define OTA_GET_FIRMWARE_ENDPOINT "/firmware"
 
