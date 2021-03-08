@@ -13,6 +13,7 @@ pipeline {
             }
         }
         stage ('Deploy firmware') {
+            agent any
             steps{
                 script {
                     commitId = sh(returnStdout: true, script: 'git rev-list --count HEAD') 
@@ -24,6 +25,7 @@ pipeline {
             }
         }
         stage('Building image') {
+            agent any
             steps{
                 script {
                     dockerImage = docker.build("local:plantiniser_firmware_provider","scripts")
