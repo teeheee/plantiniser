@@ -18,7 +18,7 @@ pipeline {
                 script {
                     commitId = sh(returnStdout: true, script: 'git rev-list --count HEAD') 
                 }
-                sshagent(credentials : ['alex'])
+                sshagent(credentials : ['alex_sshkey'])
                 {
                     sh 'scp ./.pio/build/main/firmware.bin alex@192.168.178.2:~/plantiniser_firmware_provider/opt/'+commitId+'.bin'
                 }
