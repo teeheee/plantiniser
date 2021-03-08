@@ -14,9 +14,11 @@ pipeline {
         }
         stage ('Deploy firmware') {
             steps{
+                script {
+                    commitId = sh(returnStdout: true, script: 'git rev-list --count HEAD') 
+                }
                 sshagent(credentials : ['alex'])
                 {
-                    commitId = sh(returnStdout: true, script: 'git rev-list --count HEAD)') 
                     sh 'scp ./.pio/build/main/firmware.bin alex@host:~/plantiniser_firmware_provider/opt/'+commitId+'.bin'
                 }
             }
