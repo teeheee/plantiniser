@@ -20,7 +20,7 @@ pipeline {
                 }
                 sshagent(credentials : ['alex_sshkey'])
                 {
-                    sh 'scp -o StrictHostKeyChecking=no ./.pio/build/main/firmware.bin alex@192.168.178.2:~/plantiniser_firmware_provider/opt/'+commitId+'.bin'
+                    sh 'scp -o StrictHostKeyChecking=no ./.pio/build/main/firmware.bin alex@192.168.178.2:~/plantiniser_firmware_provider/opt/1.bin'
                 }
             }
         }
