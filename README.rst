@@ -37,4 +37,3 @@ How to build PlatformIO based project
     # Clean build files
     > platformio run --target clean
 
-
