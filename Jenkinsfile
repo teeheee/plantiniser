@@ -28,7 +28,7 @@ pipeline {
             agent any
             steps{
                 script {
-                    dockerImage = docker.build("local:plantiniser_firmware_provider","scripts")
+                    dockerImage = docker.build("local/plantiniser_firmware_provider","scripts")
                 }
             }
         }
