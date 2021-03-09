@@ -13,6 +13,7 @@ void network_manager::process()
 {
     if(mqtt->is_initalized())
     {  
+        ota->check_update();
         mqtt->process();
         rtc->process();
     }
@@ -27,7 +28,6 @@ void network_manager::process()
         {
             rtc->init();
             ota->init();
-            ota->check_update();
         }
     }
 }
