@@ -30,7 +30,7 @@ OTAConfig config(
         OTA_SERVER_URL,
         OTA_GET_VERSION_ENDPOINT,
         OTA_GET_FIRMWARE_ENDPOINT,
-        true // Debug
+        false // Debug
 );
 
 EasyOTA ota(config);
