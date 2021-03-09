@@ -6,8 +6,14 @@
 #include "ui_hal.h"
 
 
-
 class StringItem : public ConfigBaseItem_Template<std::string>{
+private:
+    std::string& trim(std::string& input)
+    {
+        return input.erase(input.find_last_not_of(" \n\r\t")+1);
+    }
+
+
 public:
     StringItem() : ConfigBaseItem_Template() {}
 
@@ -21,7 +27,9 @@ public:
     {
         if(is_data_valid())
         {
-            return std::string((const char*)data_pointer);
+            std::string data = std::string((const char*)data_pointer);
+            data = trim(data);
+            return data;
         }
         else
         {
@@ -31,6 +39,7 @@ public:
     
     void write_data(std::string content)
     {
+        content = trim(content);
         if(data_size >= content.length())
         {
             memcpy(data_pointer, content.c_str(), content.length());

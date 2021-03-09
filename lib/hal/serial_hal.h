@@ -12,6 +12,8 @@ class hal_serial {
 };
 
 class hal_serial_impl : public hal_serial{
+    private:
+        std::string input_string;
     public:
         void init();
         std::string read();

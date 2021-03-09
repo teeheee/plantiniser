@@ -1,5 +1,6 @@
 #include "network_manager.h"
 
+
 network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ota* aota, hal_time* artc)
 {
     mqtt = amqtt;
@@ -11,8 +12,7 @@ network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ot
 void network_manager::process()
 {
     if(mqtt->is_initalized())
-    {
-        ota->check_update();
+    {  
         mqtt->process();
         rtc->process();
     }
@@ -27,6 +27,7 @@ void network_manager::process()
         {
             rtc->init();
             ota->init();
+            ota->check_update();
         }
     }
 }

@@ -35,6 +35,9 @@ void ui_serial::process_start_screen()
     else
         serial->write(std::string("no time"));
     
+    serial->write(std::string("Version"));
+    serial->write(toString(VERSION));
+
     std::string text = serial->read();
     if(text.length() > 0)
     {
