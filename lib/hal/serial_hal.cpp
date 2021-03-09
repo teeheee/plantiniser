@@ -1,3 +1,5 @@
+#ifndef __TEST__
+
 #include "serial_hal.h"
 #include <ESP8266WiFi.h>
 
@@ -17,3 +19,5 @@ std::string hal_serial_impl::read()
     String str = Serial.readStringUntil('\n');
     return std::string(str.c_str());
 }
+
+#endif

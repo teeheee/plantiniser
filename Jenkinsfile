@@ -1,6 +1,17 @@
 pipeline {
     agent none
     stages {
+        stage('Test firmware') {
+            agent {
+                docker { 
+                   image 'infinitecoding/platformio-for-ci' 
+                   args '-u root:root'
+                }
+            }
+            steps {
+                sh 'pio test -e native'
+            }
+        }
         stage('Building firmware') {
             agent {
                 docker { 
