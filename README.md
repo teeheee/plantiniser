@@ -4,8 +4,6 @@ A watering system
 
 # Usage Guide
 
-
-
 # Platformio Commands
 
 ## Run unit tests
