@@ -34,7 +34,6 @@ bool hal_mqtt_impl::init(std::string ssid, std::string pass, std::string server)
         }
     }
     randomSeed(micros());
-    IPAddress ip = WiFi.localIP();
     client.setServer(server.c_str(), 1883);
     client.setCallback(callback);
     is_initialized_flag = true;
