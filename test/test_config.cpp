@@ -6,7 +6,6 @@
 #include "config.h"
 
 #include "eeprom_hal.h"
-#include "ui_hal.h"
 
 #include <string>
 #include <queue>
