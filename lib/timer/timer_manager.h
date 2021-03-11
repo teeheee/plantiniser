@@ -17,6 +17,7 @@ private:
 public:
     TimerManager(ConfigManage* config, hal_power* power, hal_time* rtc);
     void process();
+    std::string get_current_time();
 };
 
 #endif

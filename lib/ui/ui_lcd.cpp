@@ -21,11 +21,12 @@ std::string toString(const T &value) {
 const char valid_character_list[] = "\0abcdefghijklmnopqrstuvwxyz0123456789!§$%&/()=?*+#-_.:,;ABCDEFGHIJKLMNOPQRSTUVWXYZ ";
 
 
-ui_lcd::ui_lcd(hal_ui* p_ui, ConfigManage* p_config, network_manager* p_network)
+ui_lcd::ui_lcd(hal_ui* p_ui, ConfigManage* p_config, network_manager* p_network, TimerManager* p_timemanage)
 {
     config = p_config;
     ui = p_ui;
     network = p_network;
+    time_manage = p_timemanage;
     item_list = config->get_config_item_list();
     config_iterator = item_list->begin();
     state = START_SCREEN;

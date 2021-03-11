@@ -40,3 +40,8 @@ void TimerManager::process()
         }
     }
 }
+
+std::string TimerManager::get_current_time()
+{
+  return rtc->get_formated();
+}

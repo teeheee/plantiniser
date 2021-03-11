@@ -12,36 +12,49 @@ std::string toString(const T &value) {
     return os.str();
 }
 
-ui_serial::ui_serial(hal_serial* p_serial, ConfigManage* p_config, network_manager* p_network)
+ui_serial::ui_serial(hal_serial* p_serial, ConfigManage* p_config, network_manager* p_network, TimerManager* p_timemanage)
 {
     item_list = p_config->get_config_item_list();
     config_iterator = item_list->begin();
     serial = p_serial;
     network = p_network;
+    time_manage = p_timemanage;
     state = START_SCREEN;
     first_run = 1;
 }
 
-void ui_serial::process_start_screen()
+void ui_serial::update_info_screen()
 {
     serial->write(std::string("plantiniser"));
     if(network->is_wifi_connected())
+    {
         serial->write(std::string("wifi connected"));
+    }
     else
-        serial->write(std::string("no wifi"));
-    
+    {
+        serial->write(std::string("wifi not connected")); 
+    }   
     if(network->is_time_synced())
-        serial->write(std::string("time synced"));
+    {
+        serial->write(std::string("time: ") + time_manage->get_current_time());
+    }
     else
-        serial->write(std::string("no time"));
-    
-    serial->write(std::string("Version"));
-    serial->write(toString(VERSION));
+    {
+        serial->write(std::string("time: none"));
+    }
+    serial->write(std::string("Version: ") + toString(VERSION));
+}
 
+void ui_serial::process_start_screen()
+{
     std::string text = serial->read();
     if(text.length() > 0)
     {
-        state = CONFIG_MENU;
+        serial->write(text);
+        if(text[0] == 'u')
+            update_info_screen();
+        if(text[0] == 'c')
+            state = CONFIG_MENU;
     }    
 }
 

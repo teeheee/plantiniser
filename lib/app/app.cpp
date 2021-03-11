@@ -9,6 +9,7 @@ app::app()
   ui = new hal_ui_impl(); 
   ota = new hal_ota_impl();
   serial = new hal_serial_impl();
+  nrf24 = new hal_nrf24_impl();
   
   ui->init();
   serial->init();
@@ -16,10 +17,10 @@ app::app()
   power->init();
 
   config_manage = new ConfigManage(eeprom);
-  network_manage = new network_manager(config_manage, mqtt, ota, rtc);
-  ui_lcd_object = new ui_lcd(ui, config_manage, network_manage);
-  ui_serial_object = new ui_serial(serial, config_manage, network_manage);
+  network_manage = new network_manager(config_manage, mqtt, ota, rtc, nrf24);
   time_manage = new TimerManager(config_manage, power, rtc);
+  ui_lcd_object = new ui_lcd(ui, config_manage, network_manage, time_manage);
+  ui_serial_object = new ui_serial(serial, config_manage, network_manage, time_manage);
 }
 
 void app::process()

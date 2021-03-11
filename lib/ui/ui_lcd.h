@@ -4,12 +4,14 @@
 #include "ui_hal.h"
 #include "config.h"
 #include "network_manager.h"
+#include "timer_manager.h"
 
 class ui_lcd{
 private:
     hal_ui* ui;
     ConfigManage* config;
     network_manager* network;
+    TimerManager* time_manage;
     enum state_type{
         START_SCREEN,
         CONFIG_MENU,
@@ -34,7 +36,7 @@ private:
     void process_config_string_item(StringItem* item);
     void process_config_number_item(NumberItem* item);
 public:
-    ui_lcd(hal_ui* p_ui, ConfigManage* p_config, network_manager* p_network);
+    ui_lcd(hal_ui* p_ui, ConfigManage* p_config, network_manager* p_network, TimerManager* p_timemanage);
     void process();
 };
 

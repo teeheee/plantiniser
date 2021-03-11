@@ -10,7 +10,7 @@ public:
     virtual bool init(std::string ssid, std::string pass, std::string server) = 0;
     virtual void pub(std::string topic, std::string payload) = 0;
     virtual void sub(std::string topic, mqtt_sub_callback_t callback) = 0;
-    virtual void process();
+    virtual void process() = 0;
     virtual bool is_initalized() = 0;
     virtual bool is_connected() = 0;
 };

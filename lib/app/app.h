@@ -6,6 +6,7 @@
 #include "power_hal.h"
 #include "ota_hal.h"
 #include "time_hal.h"
+#include "nrf24_hal.h"
 #include "ui_hal.h"
 #include "config.h"
 #include "ui_lcd.h"
@@ -21,6 +22,7 @@ class app{
         hal_ui* ui;
         hal_ota* ota;
         hal_serial* serial;
+        hal_nrf24* nrf24;
 
         ConfigManage* config_manage;
         TimerManager* time_manage;

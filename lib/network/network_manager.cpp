@@ -1,21 +1,82 @@
 #include "network_manager.h"
 
 
-network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ota* aota, hal_time* artc)
+network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ota* aota, hal_time* artc, hal_nrf24* anrf24)
 {
+    nrf24 = anrf24;
     mqtt = amqtt;
     ota = aota;
     rtc = artc;
     config_manage = p_config;
 }
 
+bool network_manager::test_checksum(hal_nrf24_package_type* package)
+{
+    uint8_t sum = 0;
+    uint8_t checksum = package->data[package->length-1];
+    for(int i = 0; i < package->length-1; i++)
+    {
+        sum ^= package->data[i];
+    }
+    if( checksum == sum)
+        return true;
+    else
+        return false;
+}
+
+void network_manager::process_nrf24_package(hal_nrf24_package_type* package)
+{
+    message_type message;
+    bool is_topic = true;
+    for(int i = 0; i < package->length-1; i++)
+    {
+        char byte = (char)package->data[i];
+        if(is_topic)
+        {
+            message.topic += byte;
+        }
+        else
+        {
+            message.content += byte;
+        }
+        if(byte == '\n')
+        {
+            is_topic = false;
+        }
+    }
+    message_queue.push_back(message);
+}
+
+void network_manager::manage_nrf24()
+{
+    hal_nrf24_package_type* package = nrf24->recv();
+    if(package)
+    {
+        if(test_checksum(package))
+        {
+            process_nrf24_package(package);
+        }
+    }
+}
+
+void network_manager::manage_mqtt()
+{
+    if(message_queue.size() > 0)
+    {
+        message_type message = message_queue.front();
+        mqtt->pub(message.topic, message.content);
+        message_queue.pop_front();
+    }
+}
+
 void network_manager::process()
 {
     if(mqtt->is_initalized())
     {  
-        ota->check_update();
         mqtt->process();
         rtc->process();
+        manage_nrf24();
+        manage_mqtt();
     }
     else
     {
@@ -49,5 +110,6 @@ bool network_manager::is_time_synced()
 
 bool network_manager::is_ota_up_to_date()
 {
+    ota->check_update();
     return true; //todo not implemented
 }

@@ -4,12 +4,14 @@
 #include "serial_hal.h"
 #include "config.h"
 #include "network_manager.h"
+#include "timer_manager.h"
 
 class ui_serial{
 private:
     hal_serial* serial;
     ConfigManage* config;
     network_manager* network;
+    TimerManager* time_manage;
     enum state_type{
         START_SCREEN,
         CONFIG_MENU,
@@ -19,12 +21,13 @@ private:
     std::list<ConfigBaseItem*>::iterator config_iterator;
     int first_run;
 
+    void update_info_screen();
     void process_start_screen();
     void process_config_menu();
     void process_config_string_item(StringItem* item);
     void process_config_number_item(NumberItem* item);
 public:
-    ui_serial(hal_serial* serial, ConfigManage* p_config, network_manager* p_network);
+    ui_serial(hal_serial* serial, ConfigManage* p_config, network_manager* p_network, TimerManager* p_timemanage);
     void process();
 };
 
