@@ -59,13 +59,9 @@ Wire Wire Line
 Wire Wire Line
 	4650 3200 4650 3050
 Wire Wire Line
-	4150 3500 4000 3500
-Wire Wire Line
 	4150 3700 4050 3700
-Text GLabel 4050 3700 0    50   Input ~ 0
+Text GLabel 3850 3500 0    50   Input ~ 0
 LATCH
-Text GLabel 4000 3500 0    50   Input ~ 0
-ENABLE
 Wire Wire Line
 	4150 4200 4100 4200
 Wire Wire Line
@@ -80,23 +76,11 @@ Text Label 3750 3800 2    50   ~ 0
 SCLK
 Text Label 3750 3900 2    50   ~ 0
 MOSI
-Entry Wire Line
-	1200 2200 1300 2300
-Entry Wire Line
-	1200 2500 1300 2600
-Entry Wire Line
-	1200 2600 1300 2700
-Wire Wire Line
-	1300 2300 1550 2300
-Wire Wire Line
-	1300 2600 1550 2600
-Wire Wire Line
-	1550 2700 1300 2700
-Text Label 1500 2700 2    50   ~ 0
+Text Label 2850 2400 0    50   ~ 0
 SCLK
-Text Label 1500 2600 2    50   ~ 0
+Text Label 2850 2300 0    50   ~ 0
 MOSI
-Text Label 1500 2300 2    50   ~ 0
+Text Label 2850 2200 0    50   ~ 0
 MISO
 Entry Wire Line
 	5700 1650 5800 1750
@@ -119,16 +103,16 @@ Wire Wire Line
 $Comp
 L power:+3.3V #PWR0103
 U 1 1 5CF9BF6E
-P 2150 1250
-F 0 "#PWR0103" H 2150 1100 50  0001 C CNN
-F 1 "+3.3V" H 2165 1423 50  0000 C CNN
-F 2 "" H 2150 1250 50  0001 C CNN
-F 3 "" H 2150 1250 50  0001 C CNN
-	1    2150 1250
+P 1900 1250
+F 0 "#PWR0103" H 1900 1100 50  0001 C CNN
+F 1 "+3.3V" H 1915 1423 50  0000 C CNN
+F 2 "" H 1900 1250 50  0001 C CNN
+F 3 "" H 1900 1250 50  0001 C CNN
+	1    1900 1250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2150 1400 2150 1250
+	1900 1400 1900 1250
 $Comp
 L power:+3.3V #PWR0104
 U 1 1 5CF9C4AC
@@ -145,12 +129,12 @@ Wire Wire Line
 $Comp
 L power:GND #PWR0105
 U 1 1 5CF9CA0B
-P 2150 3000
-F 0 "#PWR0105" H 2150 2750 50  0001 C CNN
-F 1 "GND" H 2155 2827 50  0000 C CNN
-F 2 "" H 2150 3000 50  0001 C CNN
-F 3 "" H 2150 3000 50  0001 C CNN
-	1    2150 3000
+P 1900 3000
+F 0 "#PWR0105" H 1900 2750 50  0001 C CNN
+F 1 "GND" H 1905 2827 50  0000 C CNN
+F 2 "" H 1900 3000 50  0001 C CNN
+F 3 "" H 1900 3000 50  0001 C CNN
+	1    1900 3000
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -167,7 +151,7 @@ $EndComp
 Wire Wire Line
 	6450 2200 6450 2350
 Wire Wire Line
-	2150 3000 2150 2900
+	1900 3000 1900 2900
 $Comp
 L Device:LED D1
 U 1 1 5CFA266E
@@ -207,9 +191,7 @@ Wire Wire Line
 	3350 4200 3450 4200
 Wire Wire Line
 	3750 4200 3800 4200
-Text GLabel 2850 2400 2    50   Input ~ 0
-ENABLE
-Text GLabel 2850 2000 2    50   Input ~ 0
+Text GLabel 2600 1800 2    50   Input ~ 0
 LATCH
 $Comp
 L mysensors_radios:NRF24L01 U3
@@ -601,15 +583,8 @@ Wire Wire Line
 	6100 3550 6200 3550
 Wire Wire Line
 	7050 3650 6100 3650
-Wire Bus Line
-	1200 850  3450 850 
-Connection ~ 3450 850 
-Wire Bus Line
-	2950 850  3450 850 
 Text GLabel 4050 4000 0    50   Input ~ 0
 DOUT
-Text GLabel 4000 1750 0    50   Input ~ 0
-ENABLE
 Text GLabel 4000 1850 0    50   Input ~ 0
 LATCH
 Text GLabel 4000 1950 0    50   Input ~ 0
@@ -996,17 +971,9 @@ MISO
 Wire Wire Line
 	4000 1950 4150 1950
 Wire Wire Line
-	4000 1850 4150 1850
-Wire Wire Line
-	4000 1750 4150 1750
-Text GLabel 2850 1900 2    50   Input ~ 0
-RX
-Text GLabel 2850 1700 2    50   Input ~ 0
+	4000 1850 4100 1850
+Text GLabel 2600 1700 2    50   Input ~ 0
 TX
-Wire Wire Line
-	2750 1700 2850 1700
-Wire Wire Line
-	2750 1900 2850 1900
 Text GLabel 4000 1550 0    50   Input ~ 0
 RX
 Text GLabel 4000 1650 0    50   Input ~ 0
@@ -1041,18 +1008,16 @@ Wire Wire Line
 	10550 4600 10550 4400
 Wire Wire Line
 	10550 4400 10650 4400
-Text GLabel 2850 2100 2    50   Input ~ 0
+Text GLabel 2900 2900 2    50   Input ~ 0
 CSN
-Text GLabel 2850 2200 2    50   Input ~ 0
+Text GLabel 2900 2600 2    50   Input ~ 0
 IRQ
-Text GLabel 2850 2300 2    50   Input ~ 0
+Text GLabel 2900 2750 2    50   Input ~ 0
 CE
 Wire Wire Line
-	2750 2000 2850 2000
+	2500 2000 2600 2000
 Wire Wire Line
-	2750 2100 2850 2100
-Wire Wire Line
-	2850 2200 2750 2200
+	2500 2100 2600 2100
 Text GLabel 7050 1750 2    50   Input ~ 0
 CSN
 Text GLabel 7050 1850 2    50   Input ~ 0
@@ -1135,19 +1100,6 @@ F 3 "~" H 2450 6310 50  0001 C CNN
 	1    2450 6050
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR0123
-U 1 1 5D1BFAFC
-P 1400 6150
-F 0 "#PWR0123" H 1400 5900 50  0001 C CNN
-F 1 "GND" H 1405 5977 50  0000 C CNN
-F 2 "" H 1400 6150 50  0001 C CNN
-F 3 "" H 1400 6150 50  0001 C CNN
-	1    1400 6150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	1400 6150 1400 6050
 Wire Wire Line
 	1400 6050 2150 6050
 $Comp
@@ -1221,20 +1173,10 @@ Wire Wire Line
 	2750 6150 2850 6150
 Wire Wire Line
 	2850 6150 2850 6200
-Text GLabel 1700 5950 0    50   Input ~ 0
-A
-Text GLabel 1700 6150 0    50   Input ~ 0
-B
 Text GLabel 2900 5950 2    50   Input ~ 0
 C
 Wire Wire Line
 	2750 5950 2800 5950
-Wire Wire Line
-	1700 6150 1850 6150
-Connection ~ 1850 6150
-Wire Wire Line
-	1700 5950 1850 5950
-Connection ~ 1850 5950
 $Comp
 L power:+3.3V #PWR0127
 U 1 1 5D286A6A
@@ -1264,135 +1206,124 @@ Wire Wire Line
 Connection ~ 2800 5950
 Wire Wire Line
 	2800 5950 2900 5950
-Text GLabel 1450 2500 0    50   Input ~ 0
-A
-Text GLabel 1450 2400 0    50   Input ~ 0
-B
-Text GLabel 2850 2600 2    50   Input ~ 0
+Text GLabel 1150 2000 0    50   Input ~ 0
+AB
+Text GLabel 2600 2600 2    50   Input ~ 0
 C
-Wire Wire Line
-	2750 2300 2850 2300
-Wire Wire Line
-	2750 2400 2850 2400
-Wire Wire Line
-	1550 2400 1450 2400
 $Comp
 L Device:Jumper_NC_Dual JP1
 U 1 1 5D2F4C0B
-P 2950 1200
-F 0 "JP1" H 2950 1439 50  0000 C CNN
-F 1 "Flash" H 2950 1348 50  0000 C CNN
-F 2 "ROCCI_footprint:CON_Stiftleiste_3x1" H 2950 1200 50  0001 C CNN
-F 3 "~" H 2950 1200 50  0001 C CNN
-	1    2950 1200
+P 2700 1200
+F 0 "JP1" H 2700 1439 50  0000 C CNN
+F 1 "Flash" H 2700 1348 50  0000 C CNN
+F 2 "ROCCI_footprint:CON_Stiftleiste_3x1" H 2700 1200 50  0001 C CNN
+F 3 "~" H 2700 1200 50  0001 C CNN
+	1    2700 1200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2750 2600 2850 2600
+	2500 2600 2600 2600
 Wire Wire Line
-	2750 1600 2950 1600
+	2500 1600 2700 1600
 $Comp
 L power:+3.3V #PWR0128
 U 1 1 5D31FB10
-P 2600 1150
-F 0 "#PWR0128" H 2600 1000 50  0001 C CNN
-F 1 "+3.3V" H 2615 1323 50  0000 C CNN
-F 2 "" H 2600 1150 50  0001 C CNN
-F 3 "" H 2600 1150 50  0001 C CNN
-	1    2600 1150
+P 2350 1150
+F 0 "#PWR0128" H 2350 1000 50  0001 C CNN
+F 1 "+3.3V" H 2365 1323 50  0000 C CNN
+F 2 "" H 2350 1150 50  0001 C CNN
+F 3 "" H 2350 1150 50  0001 C CNN
+	1    2350 1150
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GND #PWR0129
 U 1 1 5D31FC01
-P 3300 1350
-F 0 "#PWR0129" H 3300 1100 50  0001 C CNN
-F 1 "GND" H 3305 1177 50  0000 C CNN
-F 2 "" H 3300 1350 50  0001 C CNN
-F 3 "" H 3300 1350 50  0001 C CNN
-	1    3300 1350
+P 3050 1350
+F 0 "#PWR0129" H 3050 1100 50  0001 C CNN
+F 1 "GND" H 3055 1177 50  0000 C CNN
+F 2 "" H 3050 1350 50  0001 C CNN
+F 3 "" H 3050 1350 50  0001 C CNN
+	1    3050 1350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	3200 1200 3300 1200
+	2950 1200 3050 1200
 Wire Wire Line
-	3300 1200 3300 1350
+	3050 1200 3050 1350
 Wire Wire Line
-	2700 1200 2600 1200
+	2450 1200 2350 1200
 Wire Wire Line
-	2600 1200 2600 1150
+	2350 1200 2350 1150
 Wire Wire Line
-	1550 1800 1300 1800
+	1300 1800 1050 1800
 Wire Wire Line
-	1300 1800 1300 1500
+	1050 1800 1050 1500
 Wire Wire Line
-	1550 1600 1450 1600
+	1300 1600 1200 1600
 Wire Wire Line
-	1450 1600 1450 1500
+	1200 1600 1200 1500
 $Comp
 L Device:R R2
 U 1 1 5D3FB797
-P 1450 1350
-F 0 "R2" H 1520 1396 50  0000 L CNN
-F 1 "R" H 1520 1305 50  0000 L CNN
-F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 1380 1350 50  0001 C CNN
-F 3 "~" H 1450 1350 50  0001 C CNN
-	1    1450 1350
+P 1200 1350
+F 0 "R2" H 1270 1396 50  0000 L CNN
+F 1 "R" H 1270 1305 50  0000 L CNN
+F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 1130 1350 50  0001 C CNN
+F 3 "~" H 1200 1350 50  0001 C CNN
+	1    1200 1350
 	1    0    0    -1  
 $EndComp
 $Comp
 L Device:R R1
 U 1 1 5D3FB815
-P 1300 1350
-F 0 "R1" H 1370 1396 50  0000 L CNN
-F 1 "R" H 1370 1305 50  0000 L CNN
-F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 1230 1350 50  0001 C CNN
-F 3 "~" H 1300 1350 50  0001 C CNN
-	1    1300 1350
+P 1050 1350
+F 0 "R1" H 1120 1396 50  0000 L CNN
+F 1 "R" H 1120 1305 50  0000 L CNN
+F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 980 1350 50  0001 C CNN
+F 3 "~" H 1050 1350 50  0001 C CNN
+	1    1050 1350
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1300 1200 1300 1150
+	1050 1200 1050 1150
 Wire Wire Line
-	1300 1150 1350 1150
+	1050 1150 1100 1150
 Wire Wire Line
-	1450 1150 1450 1200
+	1200 1150 1200 1200
 Wire Wire Line
-	1350 1150 1350 1100
-Connection ~ 1350 1150
+	1100 1150 1100 1100
+Connection ~ 1100 1150
 Wire Wire Line
-	1350 1150 1450 1150
+	1100 1150 1200 1150
 $Comp
 L power:+3.3V #PWR0130
 U 1 1 5D42F5B2
-P 1350 1100
-F 0 "#PWR0130" H 1350 950 50  0001 C CNN
-F 1 "+3.3V" H 1365 1273 50  0000 C CNN
-F 2 "" H 1350 1100 50  0001 C CNN
-F 3 "" H 1350 1100 50  0001 C CNN
-	1    1350 1100
+P 1100 1100
+F 0 "#PWR0130" H 1100 950 50  0001 C CNN
+F 1 "+3.3V" H 1115 1273 50  0000 C CNN
+F 2 "" H 1100 1100 50  0001 C CNN
+F 3 "" H 1100 1100 50  0001 C CNN
+	1    1100 1100
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	1450 2500 1550 2500
-NoConn ~ 1550 2200
-NoConn ~ 1550 2000
+NoConn ~ 1300 2200
 $Comp
 L Device:R R6
 U 1 1 5D4BA396
-P 2950 1450
-F 0 "R6" H 3020 1496 50  0000 L CNN
-F 1 "R" H 3020 1405 50  0000 L CNN
-F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 2880 1450 50  0001 C CNN
-F 3 "~" H 2950 1450 50  0001 C CNN
-	1    2950 1450
+P 2700 1450
+F 0 "R6" H 2770 1496 50  0000 L CNN
+F 1 "R" H 2770 1405 50  0000 L CNN
+F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 2630 1450 50  0001 C CNN
+F 3 "~" H 2700 1450 50  0001 C CNN
+	1    2700 1450
 	1    0    0    -1  
 $EndComp
-Text GLabel 3050 1600 2    50   Input ~ 0
+Text GLabel 2800 1600 2    50   Input ~ 0
 GPIO0
 Wire Wire Line
-	2950 1600 3050 1600
-Connection ~ 2950 1600
+	2700 1600 2800 1600
+Connection ~ 2700 1600
 Text GLabel 4000 1450 0    50   Input ~ 0
 GPIO0
 Wire Wire Line
@@ -1478,22 +1409,20 @@ NoConn ~ 5150 4200
 $Comp
 L RF_Module:ESP-12E U1
 U 1 1 5CF941B0
-P 2150 2200
-F 0 "U1" H 1750 3000 50  0000 C CNN
-F 1 "ESP-12E" H 2450 3000 50  0000 C CNN
-F 2 "RF_Module:ESP-12E" H 2150 2200 50  0001 C CNN
-F 3 "http://wiki.ai-thinker.com/_media/esp8266/esp8266_series_modules_user_manual_v1.1.pdf" H 1800 2300 50  0001 C CNN
-	1    2150 2200
+P 1900 2200
+F 0 "U1" H 1500 3000 50  0000 C CNN
+F 1 "ESP-12E" H 2200 3000 50  0000 C CNN
+F 2 "RF_Module:ESP-12E" H 1900 2200 50  0001 C CNN
+F 3 "http://wiki.ai-thinker.com/_media/esp8266/esp8266_series_modules_user_manual_v1.1.pdf" H 1550 2300 50  0001 C CNN
+	1    1900 2200
 	1    0    0    -1  
 $EndComp
-Text GLabel 2850 2500 2    50   Input ~ 0
+Text GLabel 2600 2100 2    50   Input ~ 0
 SDA
-Text GLabel 2850 1800 2    50   Input ~ 0
+Text GLabel 2600 2000 2    50   Input ~ 0
 SCL
 Wire Wire Line
-	2750 1800 2850 1800
-Wire Wire Line
-	2850 2500 2750 2500
+	2500 1800 2600 1800
 NoConn ~ 9050 1700
 NoConn ~ 9050 2750
 $Comp
@@ -1544,10 +1473,140 @@ Text Label 5600 4000 0    50   ~ 0
 RE6
 Text Label 5500 4100 0    50   ~ 0
 RE7
-Wire Bus Line
-	1200 850  1200 2600
+NoConn ~ 1300 2400
+NoConn ~ 1300 2500
+Wire Wire Line
+	1150 2000 1300 2000
+Text GLabel 1400 6050 0    50   Input ~ 0
+AB
+$Comp
+L Device:R R?
+U 1 1 60501323
+P 1600 5950
+F 0 "R?" H 1670 5996 50  0000 L CNN
+F 1 "R" H 1670 5905 50  0000 L CNN
+F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 1530 5950 50  0001 C CNN
+F 3 "~" H 1600 5950 50  0001 C CNN
+	1    1600 5950
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R?
+U 1 1 6051FADF
+P 1600 6150
+F 0 "R?" H 1670 6196 50  0000 L CNN
+F 1 "R" H 1670 6105 50  0000 L CNN
+F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 1530 6150 50  0001 C CNN
+F 3 "~" H 1600 6150 50  0001 C CNN
+	1    1600 6150
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1750 6150 1850 6150
+Connection ~ 1850 6150
+Wire Wire Line
+	1750 5950 1850 5950
+Connection ~ 1850 5950
+Wire Wire Line
+	1450 5950 1100 5950
+Wire Wire Line
+	1100 5950 1100 6150
+Wire Wire Line
+	1100 6150 1450 6150
+Wire Wire Line
+	1100 6150 1100 6600
+Connection ~ 1100 6150
+$Comp
+L power:GND #PWR?
+U 1 1 6057CE52
+P 1100 6600
+F 0 "#PWR?" H 1100 6350 50  0001 C CNN
+F 1 "GND" H 1105 6427 50  0000 C CNN
+F 2 "" H 1100 6600 50  0001 C CNN
+F 3 "" H 1100 6600 50  0001 C CNN
+	1    1100 6600
+	1    0    0    -1  
+$EndComp
+Text GLabel 2600 1900 2    50   Input ~ 0
+RX
+NoConn ~ 1300 2600
+NoConn ~ 1300 2700
+NoConn ~ 1300 2300
+Entry Wire Line
+	3450 2050 3550 2150
+Entry Wire Line
+	3350 2200 3450 2300
+Entry Wire Line
+	3350 2300 3450 2400
+Entry Wire Line
+	3350 2400 3450 2500
+Wire Wire Line
+	2500 2200 3350 2200
+Wire Wire Line
+	2500 2300 3350 2300
+Wire Wire Line
+	2500 2400 3350 2400
+$Comp
+L Device:R R?
+U 1 1 6062CBF5
+P 3250 2800
+F 0 "R?" V 3250 2800 50  0000 C CNN
+F 1 "R" V 3300 2650 50  0000 C CNN
+F 2 "ROCCI_footprint:Wiederstand_SMD_0805" V 3180 2800 50  0001 C CNN
+F 3 "~" H 3250 2800 50  0001 C CNN
+	1    3250 2800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3250 2500 3250 2650
+$Comp
+L power:GND #PWR?
+U 1 1 6064CC72
+P 3250 3150
+F 0 "#PWR?" H 3250 2900 50  0001 C CNN
+F 1 "GND" H 3255 2977 50  0000 C CNN
+F 2 "" H 3250 3150 50  0001 C CNN
+F 3 "" H 3250 3150 50  0001 C CNN
+	1    3250 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3850 3500 4050 3500
+Wire Wire Line
+	4050 3700 4050 3500
+Connection ~ 4050 3500
+Wire Wire Line
+	4050 3500 4150 3500
+Wire Wire Line
+	4150 1750 4100 1750
+Wire Wire Line
+	4100 1750 4100 1850
+Connection ~ 4100 1850
+Wire Wire Line
+	4100 1850 4150 1850
+NoConn ~ 2900 2600
+Wire Wire Line
+	2500 1900 2600 1900
+Wire Wire Line
+	2500 1700 2600 1700
+Wire Wire Line
+	3250 2950 3250 3150
+Wire Wire Line
+	2500 2500 2800 2500
+Wire Wire Line
+	2800 2500 2800 2750
+Wire Wire Line
+	2800 2750 2900 2750
+Connection ~ 2800 2500
+Wire Wire Line
+	2800 2500 3250 2500
+Wire Wire Line
+	2800 2750 2800 2900
+Wire Wire Line
+	2800 2900 2900 2900
 Wire Bus Line
 	5700 850  5700 1850
 Wire Bus Line
 	3450 850  3450 3850
+Connection ~ 2800 2750
 $EndSCHEMATC
