@@ -98,6 +98,7 @@ void network_manager::process()
         {
             rtc->init();
             ota->init();
+            is_ota_up_to_date();
         }
     }
 }
