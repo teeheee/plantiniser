@@ -1,4 +1,5 @@
 #include "network_manager.h"
+#include "logging.h"
 
 
 network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ota* aota, hal_time* artc, hal_nrf24* anrf24)
@@ -44,6 +45,9 @@ void network_manager::process_nrf24_package(hal_nrf24_package_type* package)
             is_topic = false;
         }
     }
+    LOG("push message in queue:");
+    LOG(message.topic.c_str());
+    LOG(message.content.c_str());
     message_queue.push_back(message);
 }
 
@@ -52,8 +56,10 @@ void network_manager::manage_nrf24()
     hal_nrf24_package_type* package = nrf24->recv();
     if(package)
     {
+        LOG("got some package");
         if(test_checksum(package))
         {
+            LOG("package is valid");
             process_nrf24_package(package);
         }
     }
@@ -66,6 +72,9 @@ void network_manager::manage_mqtt()
         message_type message = message_queue.front();
         mqtt->pub(message.topic, message.content);
         message_queue.pop_front();
+        LOG("pop message from queue:");
+        LOG(message.topic.c_str());
+        LOG(message.content.c_str());
     }
 }
 

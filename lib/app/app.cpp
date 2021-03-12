@@ -15,6 +15,7 @@ app::app()
   serial->init();
   eeprom->init();
   power->init();
+  nrf24->init();
 
   config_manage = new ConfigManage(eeprom);
   network_manage = new network_manager(config_manage, mqtt, ota, rtc, nrf24);

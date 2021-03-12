@@ -42,11 +42,15 @@ bool hal_mqtt_impl::init(std::string ssid, std::string pass, std::string server)
 
 void hal_mqtt_impl::pub(std::string topic, std::string payload)
 {
+    if(topic.back() == '\n')
+        topic = topic.substr(0, topic.size()-1);
     client.publish(topic.c_str(), payload.c_str());
 }
 
 void hal_mqtt_impl::sub(std::string topic, mqtt_sub_callback_t callback)
 {
+    if(topic.back() == '\n')
+        topic = topic.substr(0, topic.size()-1);
     if(topic_index < MAX_TOPICS)
     {
         client.subscribe(topic.c_str());
