@@ -11,6 +11,7 @@ private:
     hal_power* power;
     hal_time* rtc;
 
+    bool tick_flag;
     int last_minute;
     int pump_timeout;
     void minute_tick(int minute, int hour);
@@ -18,6 +19,7 @@ public:
     TimerManager(ConfigManage* config, hal_power* power, hal_time* rtc);
     void process();
     std::string get_current_time();
+    bool get_tick();
 };
 
 #endif

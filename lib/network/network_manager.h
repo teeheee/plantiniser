@@ -2,6 +2,7 @@
 #define _NETWORK_MANAGER_H_
 
 #include "mqtt_hal.h"
+#include "wifi_hal.h"
 #include "ota_hal.h"
 #include "nrf24_hal.h"
 #include "time_hal.h"
@@ -19,6 +20,7 @@ class network_manager{
         hal_ota* ota;
         hal_time* rtc;
         hal_nrf24* nrf24;
+        hal_wifi* wifi;
         ConfigManage* config_manage;
         std::list<message_type> message_queue;
         bool test_checksum(hal_nrf24_package_type* package);
@@ -26,7 +28,7 @@ class network_manager{
         void manage_nrf24();
         void manage_mqtt();
     public:
-        network_manager(ConfigManage* p_config, hal_mqtt* mqtt, hal_ota* ota, hal_time* rtc, hal_nrf24* nrf24);
+        network_manager(ConfigManage* p_config, hal_mqtt* mqtt, hal_ota* ota, hal_time* rtc, hal_nrf24* nrf24, hal_wifi* wifi);
         void process();
         bool is_wifi_connected();
         bool is_mqtt_server_active();

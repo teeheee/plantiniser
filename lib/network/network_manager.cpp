@@ -2,8 +2,9 @@
 #include "logging.h"
 
 
-network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ota* aota, hal_time* artc, hal_nrf24* anrf24)
+network_manager::network_manager(ConfigManage* p_config, hal_mqtt* amqtt, hal_ota* aota, hal_time* artc, hal_nrf24* anrf24, hal_wifi* awifi)
 {
+    wifi = awifi;
     nrf24 = anrf24;
     mqtt = amqtt;
     ota = aota;
@@ -80,37 +81,51 @@ void network_manager::manage_mqtt()
 
 void network_manager::process()
 {
-    if(mqtt->is_initalized())
-    {  
+    if(! wifi->is_initalized())
+    {
+        //setup connection to wifi
+        std::string ssid = config_manage->get_wifi_ssid();
+        std::string passkey = config_manage->get_wifi_passkey();
+        wifi->init(ssid, passkey);
+    }
+    else if(wifi->is_connected() && !mqtt->is_initalized())
+    {
+        //setup connection to mqtt server
+        std::string server = config_manage->get_server_address();
+        mqtt->init(server);
+        rtc->init();
+        ota->init();
+        is_ota_up_to_date();
+    }
+    else if(wifi->is_connected() && mqtt->is_initalized())
+    {
+        //mqtt is setup and wifi is connected
         mqtt->process();
         rtc->process();
         manage_nrf24();
-        manage_mqtt();
+        if(mqtt->is_connected())
+        {    
+            manage_mqtt();
+        }       
+        else
+        {
+            LOG("mqtt lost connection");
+        }
     }
     else
     {
-        std::string ssid = config_manage->get_wifi_ssid();
-        std::string passkey = config_manage->get_wifi_passkey();
-        std::string server = config_manage->get_server_address();
-        mqtt->init(ssid, passkey, server);
-        if( mqtt->is_initalized()
-            && mqtt->is_connected())
-        {
-            rtc->init();
-            ota->init();
-            is_ota_up_to_date();
-        }
+        LOG("wifi lost connection");
     }
 }
 
 bool network_manager::is_wifi_connected()
 {
-    return mqtt->is_initalized();
+    return wifi->is_connected();
 }
 
 bool network_manager::is_mqtt_server_active()
 {
-    return mqtt->is_initalized();
+    return mqtt->is_connected();
 }
 
 bool network_manager::is_time_synced()

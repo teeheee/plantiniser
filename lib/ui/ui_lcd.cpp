@@ -35,7 +35,28 @@ ui_lcd::ui_lcd(hal_ui* p_ui, ConfigManage* p_config, network_manager* p_network,
 
 void ui_lcd::process_start_screen()
 {
-
+    if(time_manage->get_tick())
+    {
+        ui->clear();
+        ui->print_at(1, std::string("plantiniser").c_str());
+        if(network->is_wifi_connected())
+        {
+            ui->print_at(2, std::string("wifi connected").c_str());
+        }
+        else
+        {
+            ui->print_at(2, std::string("wifi not connected").c_str()); 
+        }   
+        if(network->is_time_synced())
+        {
+            ui->print_at(3, (std::string("time: ") + time_manage->get_current_time()).c_str());
+        }
+        else
+        {
+            ui->print_at(3, std::string("time: none").c_str());
+        }
+        ui->print_at(4, (std::string("Version: ") + toString(VERSION)).c_str());
+    }
 }
 
 void ui_lcd::process_config_menu()

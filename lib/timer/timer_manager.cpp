@@ -6,6 +6,7 @@ TimerManager::TimerManager(ConfigManage* p_config, hal_power* p_power, hal_time*
     config = p_config;
     power = p_power;
     rtc = p_rtc;
+    tick_flag = true;
     power->set(0,false);
     last_minute = rtc->get_minutes();
 }
@@ -35,8 +36,9 @@ void TimerManager::process()
         int current_minute = rtc->get_minutes();
         if(last_minute != current_minute)
         {
-        minute_tick(current_minute, rtc->get_hours());
-        last_minute = current_minute;
+          minute_tick(current_minute, rtc->get_hours());
+          last_minute = current_minute;
+          tick_flag = true;
         }
     }
 }
@@ -44,4 +46,17 @@ void TimerManager::process()
 std::string TimerManager::get_current_time()
 {
   return rtc->get_formated();
+}
+
+bool TimerManager::get_tick()
+{
+  if(tick_flag)
+  {
+    tick_flag = false;
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }

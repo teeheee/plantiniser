@@ -3,11 +3,14 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include "mqtt_hal.h"
+#include "logging.h"
 
 #define MAX_TOPICS 100
 
-WiFiClient espClient;
-PubSubClient client(espClient);
+WiFiClient mqtt_client;
+PubSubClient client(mqtt_client);
+
+char server_name[100];
 
 int topic_index = 0;
 char* topiclist[MAX_TOPICS]; 
@@ -18,36 +21,38 @@ void callback(char* topic, byte* payload, unsigned int length)
     //TODO
 }
 
-bool hal_mqtt_impl::init(std::string ssid, std::string pass, std::string server)
+
+
+bool hal_mqtt_impl::init(std::string server)
 {
-    delay(10);
     topic_index = 0;
-    WiFi.begin(ssid.c_str(), pass.c_str());
-    int timeout_counter = 0;
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        timeout_counter++;
-        if(timeout_counter == 10)
-        {
-            is_initialized_flag = false;
-            return false;
-        }
-    }
+    lastReconnectAttempt = 0;
     randomSeed(micros());
-    client.setServer(server.c_str(), 1883);
+    LOG("setup mqtt server:");
+    LOG(server.c_str());
+    memcpy(server_name,server.c_str(),server.length());
+    client.setServer(server_name, 1883);
     client.setCallback(callback);
     is_initialized_flag = true;
     return true;
 }
 
-void hal_mqtt_impl::pub(std::string topic, std::string payload)
+bool hal_mqtt_impl::pub(std::string topic, std::string payload)
 {
     if(topic.back() == '\n')
         topic = topic.substr(0, topic.size()-1);
-    client.publish(topic.c_str(), payload.c_str());
+    if(client.publish(topic.c_str(), payload.c_str()))
+    {
+        return true;
+    }
+    else
+    {
+        LOG("mqtt_hal client.publish failed");
+        return false;
+    }
 }
 
-void hal_mqtt_impl::sub(std::string topic, mqtt_sub_callback_t callback)
+bool hal_mqtt_impl::sub(std::string topic, mqtt_sub_callback_t callback)
 {
     if(topic.back() == '\n')
         topic = topic.substr(0, topic.size()-1);
@@ -59,23 +64,21 @@ void hal_mqtt_impl::sub(std::string topic, mqtt_sub_callback_t callback)
     }
     else
     {
-        //error handling
+        return false;
     }
+    return true;
 }
 
 void hal_mqtt_impl::process()
 {
     if (!client.connected()) 
     {
-            //Serial.print("connect to...");
-            // Create a random client ID
-            String clientId = "ESP8266Client-";
-            clientId += String(random(0xffff), HEX);
-            // Attempt to connect
-            if (client.connect(clientId.c_str())) 
-            {
-                //Serial.println("connected");
-            } 
+        String clientId = "ESP8266Client-";
+        clientId += String(random(0xffff), HEX);
+        if (client.connect(clientId.c_str())) {
+        } else {
+            delay(5000);
+        }
     }
     else
     {

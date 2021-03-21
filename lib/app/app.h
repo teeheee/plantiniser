@@ -3,15 +3,17 @@
 
 #include "eeprom_hal.h"
 #include "mqtt_hal.h"
+#include "wifi_hal.h"
 #include "power_hal.h"
 #include "ota_hal.h"
 #include "time_hal.h"
 #include "nrf24_hal.h"
 #include "ui_hal.h"
-#include "config.h"
+#include "serial_hal.h"
 #include "ui_lcd.h"
 #include "ui_serial.h"
 #include "timer_manager.h"
+#include "config.h"
 
 class app{
     private:
@@ -23,6 +25,7 @@ class app{
         hal_ota* ota;
         hal_serial* serial;
         hal_nrf24* nrf24;
+        hal_wifi* wifi;
 
         ConfigManage* config_manage;
         TimerManager* time_manage;
