@@ -1,18 +1,30 @@
 #ifndef __TEST__
 
 #include "time_hal.h"
+#include "logging.h"
 #include <ESP8266WiFi.h>
 #include <DS1307.h>
+#include <Wire.h>
 
 
 DS1307 hardware_rtc;
 
 void hal_time_impl::init()
 {
-    configTime(0, 0, "pool.ntp.org", "time.nist.gov");
-    setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 0); 
-    hardware_rtc.start();
+    LOG("setup time server:");
+    configTime(1*3600, 0, "pool.ntp.org", "time.nist.gov");
+    //setenv("TZ", "CET-1CEST,M3.5.0,M10.5.0/3", 0); 
+    Wire.beginTransmission (0x68);
+    if (Wire.endTransmission() == 0) {
+        has_rtc = true;
+        hardware_rtc.start();
+    }
+    else
+    {
+        has_rtc = false;
+    }
     now = 0;
+
 }
 
 bool hal_time_impl::is_valid()
@@ -30,15 +42,18 @@ bool hal_time_impl::is_valid()
 
 void hal_time_impl::update_rtc(time_t new_time)
 {
-    struct tm * timeinfo;
-    timeinfo = localtime (&new_time);
-    //sec, min, hour, day, month, year
-    hardware_rtc.set(timeinfo->tm_sec, 
+    if(has_rtc)
+    {
+        struct tm * timeinfo;  
+        timeinfo = localtime (&new_time);
+        //sec, min, hour, day, month, year
+        hardware_rtc.set(timeinfo->tm_sec, 
             timeinfo->tm_min, 
             timeinfo->tm_hour, 
             timeinfo->tm_mday, 
             timeinfo->tm_mon, 
             timeinfo->tm_year);
+    }
 }
 
 time_t hal_time_impl::load_rtc()
@@ -63,7 +78,10 @@ void hal_time_impl::process()
     }
     else if(now)
     {
-        now = load_rtc();
+        if(has_rtc)
+            now = load_rtc();
+        else
+            now = 0;
     }
 }
 

@@ -47,6 +47,11 @@ void ui_serial::update_info_screen()
 
 void ui_serial::process_start_screen()
 {
+    if(first_run)
+    {
+        update_info_screen();
+        first_run = 0;
+    }
     std::string text = serial->read();
     if(text.length() > 0)
     {
@@ -54,7 +59,10 @@ void ui_serial::process_start_screen()
         if(text[0] == 'u')
             update_info_screen();
         if(text[0] == 'c')
+        {
             state = CONFIG_MENU;
+            first_run = 1;
+        }
     }    
 }
 

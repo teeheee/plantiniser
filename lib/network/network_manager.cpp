@@ -90,12 +90,12 @@ void network_manager::process()
     }
     else if(wifi->is_connected() && !mqtt->is_initalized())
     {
+        ota->init();
+        is_ota_up_to_date();
         //setup connection to mqtt server
         std::string server = config_manage->get_server_address();
         mqtt->init(server);
         rtc->init();
-        ota->init();
-        is_ota_up_to_date();
     }
     else if(wifi->is_connected() && mqtt->is_initalized())
     {
@@ -135,6 +135,9 @@ bool network_manager::is_time_synced()
 
 bool network_manager::is_ota_up_to_date()
 {
+    LOG("check for updates");
+    #ifndef DEBUG
     ota->check_update();
+    #endif
     return true; //todo not implemented
 }

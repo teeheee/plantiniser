@@ -4,6 +4,7 @@
 
 #include <EasyOTA.h>
 #include <sstream>
+#include <logging.h>
 #include <string>
 
 // Modify this when change the version
@@ -37,6 +38,7 @@ EasyOTA ota(config);
 
 void hal_ota_impl::init()
 {
+    LOG("setup ota server:");
 }
 
 void hal_ota_impl::check_update()

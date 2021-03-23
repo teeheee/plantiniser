@@ -29,6 +29,7 @@ private:
     void update_rtc(time_t new_time);
     time_t load_rtc();
     time_t now;
+    bool has_rtc;
 };
 
 #endif

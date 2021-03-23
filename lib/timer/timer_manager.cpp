@@ -1,4 +1,5 @@
 #include "timer_manager.h"
+#include "logging.h"
 
 
 TimerManager::TimerManager(ConfigManage* p_config, hal_power* p_power, hal_time* p_rtc)
@@ -39,6 +40,7 @@ void TimerManager::process()
           minute_tick(current_minute, rtc->get_hours());
           last_minute = current_minute;
           tick_flag = true;
+          LOG("TM: minute tick");
         }
     }
 }

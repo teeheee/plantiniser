@@ -35,8 +35,9 @@ ui_lcd::ui_lcd(hal_ui* p_ui, ConfigManage* p_config, network_manager* p_network,
 
 void ui_lcd::process_start_screen()
 {
-    if(time_manage->get_tick())
+    if(time_manage->get_tick() || fist_run)
     {
+        fist_run=0;
         ui->clear();
         ui->print_at(1, std::string("plantiniser").c_str());
         if(network->is_wifi_connected())
