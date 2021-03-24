@@ -58,6 +58,10 @@ void ui_lcd::process_start_screen()
         }
         ui->print_at(4, (std::string("Version: ") + toString(VERSION)).c_str());
     }
+    if(ui->get_event() == ENC_SHORT_PRESS)
+    {
+        state = CONFIG_MENU;
+    }
 }
 
 void ui_lcd::process_config_menu()
@@ -106,7 +110,6 @@ void ui_lcd::process_config_string_item(StringItem* item)
     }
         
 
-    ui->process();
     if(change)
     {
         change = 0;
@@ -156,7 +159,6 @@ void ui_lcd::process_config_number_item(NumberItem* item)
         fist_run = 0;
         ui->clear();
     }
-    ui->process();
     if(change)
     {
         change = 0;
@@ -188,6 +190,7 @@ void ui_lcd::process_config_number_item(NumberItem* item)
 
 void ui_lcd::process()
 {   
+    ui->process();
     switch(state) 
     {
         case START_SCREEN:

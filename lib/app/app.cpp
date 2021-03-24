@@ -31,5 +31,4 @@ void app::process()
   ui_serial_object->process(); // this function should not be blocking
   network_manage->process();
   time_manage->process();
-  //ui->process();
 }
